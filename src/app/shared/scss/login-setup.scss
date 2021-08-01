@@ -1,4 +1,6 @@
 @import "../../shared/scss/reset.scss";
+@import "../../shared/scss/variables.scss";
+
 
 .content {
   padding: 30px;
@@ -31,14 +33,14 @@
       margin: 0 auto;
       margin-bottom: 45px;
       background-color: #ffffff;
-      color: #32cc3f;
+      color: $green-estudeme;
       font-weight: bold;
-      border: 3px solid #32cc3f;
+      border: 3px solid $green-estudeme;
       border-radius: 10px;
     }
 
     &__login-button:hover {
-      background-color: #32cc3f;
+      background-color: $green-estudeme;
       color: #ffffff;
     }
   }
