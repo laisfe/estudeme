@@ -19,8 +19,10 @@
           placeholder="Senha"
           required
         />
-        <button class="login__login-button btn btn-primary" type="submit">Login</button>
-        <button class="login__login-button btn btn-primary" type="submit">Cadastrar-se</button>
+        <button class="login__login-button btn btn-primary" 
+          type="submit"
+          (click)="goToStudentsHomePage()">Login</button>
+        <button class="login__login-button btn btn-primary" type="submit" (click)="goToSignUpPage()">Cadastrar-se</button>
       </div>
     </form>
   </div>
