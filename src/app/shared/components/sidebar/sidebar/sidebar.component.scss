@@ -1,0 +1,23 @@
+@import "../../../../shared/scss/variables.scss";
+
+.sidebar-content {
+  height: 100%;
+  padding: 30px 0 30px;
+  margin: 0;
+  width: 255px;
+
+  &__icon-estudeme {
+    width: 115px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  &__icon {
+    width: 35px;
+    margin: 66px 10px 0 28px;
+  }
+
+  &__description {
+    vertical-align: bottom;
+  }
+}
