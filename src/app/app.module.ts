@@ -11,6 +11,7 @@ import { ReportComponent } from './pages/report/report.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { SideImageComponent } from './shared/components/side-image/side-image.component';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
+import { HeaderComponent } from './shared/components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
     ReportComponent,
     SettingsComponent,
     SidebarComponent,
-    SideImageComponent
+    SideImageComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

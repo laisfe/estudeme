@@ -1,0 +1,30 @@
+@import "../../../shared/scss/variables.scss";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px;
+
+  & h1{
+      color: $gray-texts;
+      font-size: 35px;
+  }
+
+  & ul {
+    margin-right: 0 !important;
+  }
+
+  & .dropdown-toggle::after{
+    color: #535653;
+  }
+
+  & .dropdown-menu{
+    width: 75px;
+    min-width: 30px;
+  }
+
+  &__icon {
+    width: 35px;
+  }
+}
