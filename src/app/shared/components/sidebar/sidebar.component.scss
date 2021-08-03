@@ -47,5 +47,13 @@
       font-size: 15px;
     }
     vertical-align: super;
+    font-weight: bold;
+    color: $gray-texts;
+    margin-left: 5px;
+  }
+
+  &__description:hover {
+    cursor: pointer;
+    $green-estudeme: #32cc3f;
   }
 }
