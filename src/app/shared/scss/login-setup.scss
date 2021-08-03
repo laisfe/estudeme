@@ -2,8 +2,16 @@
 @import "../../shared/scss/variables.scss";
 
 .content {
-  padding: 30px;
+  // padding: 30px;
   height: 100%;
+
+  .centralize-content-login {
+    margin: 91px 0;
+  }
+
+  .centralize-content-signup {
+    margin: 37px 0;
+  }
 
   .col-md-6 {
     height: 100% !important;
@@ -13,6 +21,7 @@
     width: 100px;
     margin: 0 auto;
     margin-bottom: 40px;
+    // margin-top: 50px;
     display: flex;
   }
 
