@@ -1,0 +1,51 @@
+@import "../../../shared/scss/variables.scss";
+@import "../../../shared/scss/reset.scss";
+
+.sidebar-content {
+  @media screen and (max-width: 400px) {
+    width: 79px;
+  }
+  padding: 30px 0 30px;
+  margin: 0;
+  width: 200px;
+  z-index: 999999;
+  position: fixed;
+  height: 100%;
+  background: white;
+
+  &__icon-estudeme {
+    @media screen and (max-width: 400px) {
+      width: 65px;
+    }
+    width: 115px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  &__section-division {
+    @media screen and (max-width: 400px) {
+      margin-top: 50px;
+    }
+    text-align: center;
+    margin-top: 65px;
+  }
+
+  &__icon {
+    @media screen and (max-width: 400px) {
+      width: 25px;
+      display: block;
+      margin: auto;
+    }
+    width: 35px;
+  }
+
+  &__description {
+    @media screen and (max-width: 400px) {
+      vertical-align: super;
+      word-break: break-all;
+      padding: 1px;
+      font-size: 15px;
+    }
+    vertical-align: super;
+  }
+}

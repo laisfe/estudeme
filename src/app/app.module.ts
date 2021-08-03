@@ -9,7 +9,8 @@ import { DocumentsComponent } from './pages/documents/documents.component';
 import { StudentsComponent } from './pages/students/students.component';
 import { ReportComponent } from './pages/report/report.component';
 import { SettingsComponent } from './pages/settings/settings.component';
-import { SidebarComponent } from './shared/components/sidebar/sidebar/sidebar.component';
+import { SideImageComponent } from './shared/components/side-image/side-image.component';
+import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar/sidebar.co
     StudentsComponent,
     ReportComponent,
     SettingsComponent,
-    SidebarComponent
+    SidebarComponent,
+    SideImageComponent
   ],
   imports: [
     BrowserModule,

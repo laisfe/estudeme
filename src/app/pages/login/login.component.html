@@ -19,21 +19,25 @@
           placeholder="Senha"
           required
         />
-        <button class="login__login-button btn btn-primary" 
+        <button
+          class="login__login-button btn btn-primary"
           type="submit"
-          (click)="goToStudentsHomePage()">Login</button>
-        <button class="login__login-button btn btn-primary" type="submit" (click)="goToSignUpPage()">Cadastrar-se</button>
+          (click)="goToStudentsHomePage()"
+        >
+          Login
+        </button>
+        <button
+          class="login__login-button btn btn-primary"
+          type="submit"
+          (click)="goToSignUpPage()"
+        >
+          Cadastrar-se
+        </button>
       </div>
     </form>
   </div>
 
   <div class="col-md-6">
-    <div class="side-logo">
-      <img
-        class="side-logo__logo"
-        src="../../../assets/img/LogoMakr-2tFfwC.png"
-        alt="Logo Estudeme"
-      />
-    </div>
+    <app-side-image></app-side-image>
   </div>
 </div>

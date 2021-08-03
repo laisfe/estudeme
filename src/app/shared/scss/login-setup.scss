@@ -1,13 +1,12 @@
 @import "../../shared/scss/reset.scss";
 @import "../../shared/scss/variables.scss";
 
-
 .content {
   padding: 30px;
   height: 100%;
 
-  .col-md-6{
-      height: 100% !important;
+  .col-md-6 {
+    height: 100% !important;
   }
 
   .logo-login {
@@ -42,21 +41,6 @@
     &__login-button:hover {
       background-color: $green-estudeme;
       color: #ffffff;
-    }
-  }
-
-  .side-logo {
-    background-color: #d0ffd4;
-    height: 100%;
-
-    &__logo {
-      width: 300px;
-      margin: 0;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      -ms-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
     }
   }
 }
