@@ -57,3 +57,10 @@
     color: $green-estudeme;
   }
 }
+
+.students,
+.documents,
+.reports,
+.settings {
+  border-right: 4px solid $green-estudeme;
+}

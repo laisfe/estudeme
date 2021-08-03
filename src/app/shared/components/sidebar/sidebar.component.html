@@ -5,7 +5,10 @@
     alt="Logo Estudeme"
   />
 
-  <section class="sidebar-content__section-division">
+  <section
+    class="sidebar-content__section-division"
+    [ngClass]="{ students: routeReturn() === '/students' }"
+  >
     <a href="/students">
       <img
         class="sidebar-content__icon"
@@ -16,7 +19,10 @@
     </a>
   </section>
 
-  <section class="sidebar-content__section-division">
+  <section
+    class="sidebar-content__section-division"
+    [ngClass]="{ documents: routeReturn() === '/documents' }"
+  >
     <a href="/documents">
       <img
         class="sidebar-content__icon"
@@ -27,7 +33,10 @@
     </a>
   </section>
 
-  <section class="sidebar-content__section-division">
+  <section
+    class="sidebar-content__section-division"
+    [ngClass]="{ reports: routeReturn() === '/reports' }"
+  >
     <a href="/reports">
       <img
         class="sidebar-content__icon"
@@ -38,7 +47,10 @@
     </a>
   </section>
 
-  <section class="sidebar-content__section-division">
+  <section
+    class="sidebar-content__section-division"
+    [ngClass]="{ settings: routeReturn() === '/settings' }"
+  >
     <a href="settings">
       <img
         class="sidebar-content__icon"
