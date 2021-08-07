@@ -1,10 +1,20 @@
 @import "../../shared/scss/main-content.scss";
 @import "../../shared/scss/variables.scss";
 
+.scroll-table {
+  height: 427px;
+  overflow-y: auto;
+}
+
 .students {
   &__profile-image {
     width: 76px;
     border-radius: 38px;
+  }
+
+  & a:hover {
+    text-decoration: none;
+    cursor: pointer;
   }
 
   & td {
@@ -15,40 +25,17 @@
     vertical-align: middle;
     font-weight: bold;
     color: $gray-texts;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
   }
 
   &__profile-row {
-    border-bottom: 1px solid $gray-texts;
+    border-bottom: 1px solid $gray-texts !important;
     display: flex;
   }
 
   &__profile-row:last-child {
     border: none;
   }
-}
-
-//Scroll
-tbody,
-tr,
-th,
-td {
-  display: block;
-}
-
-tr:after {
-  content: " ";
-  display: block;
-  clear: both;
-}
-
-tbody {
-  height: 427px;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-tbody td {
-  width: 20%;
-  display: flex;
-  align-items: center;
 }

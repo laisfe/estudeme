@@ -12,6 +12,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { SideImageComponent } from './shared/components/side-image/side-image.component';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { HeaderComponent } from './shared/components/header/header.component';
+import { GlobalVariable } from './shared/globals';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { HeaderComponent } from './shared/components/header/header.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [GlobalVariable],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

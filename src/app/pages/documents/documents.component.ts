@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalVariable } from '../../shared/globals';
 
 @Component({
   selector: 'app-documents',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocumentsComponent implements OnInit {
 
-  constructor() { }
+  constructor(public globalVariable: GlobalVariable) { }
 
   ngOnInit(): void {
+    this.globalVariable.studentNameGlobal;
+    this.globalVariable.studentFullNameGlobal;
   }
 
 }

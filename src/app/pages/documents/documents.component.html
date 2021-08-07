@@ -4,6 +4,110 @@
   <div class="row">
     <div class="col-md-12">
       <app-header [title]="'Documentos'"></app-header>
+      <div class="container student-docs">
+        <section class="student-docs__head">
+          <img
+            class="student-docs__head__image"
+            src="../../../assets/img/{{ globalVariable?.studentNameGlobal }}{{
+              '.jpg'
+            }}"
+            alt="Imagem alunos"
+          />
+          <h4 class="student-docs__head__name">
+            {{ globalVariable?.studentFullNameGlobal }}
+          </h4>
+        </section>
+
+        <section class="student-docs__title">
+          <h2 class="student-docs__title__main-title">Upload de atividades</h2>
+          <section class="student-docs__title__name">
+            <select class="form-select student-docs__title__name__class">
+              <option selected>Português</option>
+              <option value="1">Matemática</option>
+            </select>
+            <label></label>
+          </section>
+        </section>
+
+        <div class="student-docs__scroll-table">
+          <table class="table">
+            <tbody>
+              <tr class="student-docs__scroll-table__row">
+                <td>
+                  <img
+                    class="student-docs__scroll-table__row__image"
+                    src="../../../assets/svg/file-earmark-excel.svg"
+                    alt="Excel ícone"
+                  />
+                </td>
+                <td>Nome do arquivo</td>
+                <td>12/06/2022</td>
+                <td>
+                  <img
+                    class="student-docs__scroll-table__row__image"
+                    src="../../../assets/svg/download.svg"
+                    alt="Download ícone"
+                  />
+                </td>
+              </tr>
+              <tr class="student-docs__scroll-table__row">
+                <td>
+                  <img
+                    class="student-docs__scroll-table__row__image"
+                    src="../../../assets/svg/file-earmark-word.svg"
+                    alt="Word ícone"
+                  />
+                </td>
+                <td>Nome do arquivo</td>
+                <td>12/06/2022</td>
+                <td>
+                  <img
+                    class="student-docs__scroll-table__row__image"
+                    src="../../../assets/svg/download.svg"
+                    alt="Download ícone"
+                  />
+                </td>
+              </tr>
+              <tr class="student-docs__scroll-table__row">
+                <td>
+                  <img
+                    class="student-docs__scroll-table__row__image"
+                    src="../../../assets/svg/file-pdf.svg"
+                    alt="PDF ícone"
+                  />
+                </td>
+                <td>Nome do arquivo</td>
+                <td>12/06/2022</td>
+                <td>
+                  <img
+                    class="student-docs__scroll-table__row__image"
+                    src="../../../assets/svg/download.svg"
+                    alt="Download ícone"
+                  />
+                </td>
+              </tr>
+              <tr class="student-docs__scroll-table__row">
+                <td>
+                  <img
+                    class="student-docs__scroll-table__row__image"
+                    src="../../../assets/svg/file-earmark-excel.svg"
+                    alt="Excel ícone"
+                  />
+                </td>
+                <td>Nome do arquivo</td>
+                <td>12/06/2022</td>
+                <td>
+                  <img
+                    class="student-docs__scroll-table__row__image"
+                    src="../../../assets/svg/download.svg"
+                    alt="Download ícone"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>

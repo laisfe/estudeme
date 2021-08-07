@@ -5,50 +5,60 @@
     <div class="col-md-12">
       <app-header [title]="'Alunos'"></app-header>
       <div class="container">
-        <table class="students table">
-          <tbody>
-            <tr class="students__profile-row">
-              <td>
-                <img
-                  class="students__profile-image"
-                  src="../../../assets/img/naruto.jpg"
-                  alt="Naruto"
-                />
-              </td>
-              <td class="students__profile-name">Naruto Uzumaki</td>
-            </tr>
-            <tr class="students__profile-row">
-              <td>
-                <img
-                  class="students__profile-image"
-                  src="../../../assets/img/kakashi.png"
-                  alt="Kakashi"
-                />
-              </td>
-              <td class="students__profile-name">Kakashi Hatake</td>
-            </tr>
-            <tr class="students__profile-row">
-              <td>
-                <img
-                  class="students__profile-image"
-                  src="../../../assets/img/gaara.jpg"
-                  alt="Gaara"
-                />
-              </td>
-              <td class="students__profile-name">Gaara</td>
-            </tr>
-            <tr class="students__profile-row">
-              <td>
-                <img
-                  class="students__profile-image"
-                  src="../../../assets/img/rocklee.png"
-                  alt="Rock Lee"
-                />
-              </td>
-              <td class="students__profile-name">Rock Lee</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="scroll-table">
+          <table class="students table">
+            <tbody>
+              <a [routerLink]="'/documents'" (click)="teste('naruto')">
+                <tr class="students__profile-row">
+                  <td>
+                    <img
+                      class="students__profile-image"
+                      src="../../../assets/img/naruto.jpg"
+                      alt="Naruto"
+                    />
+                  </td>
+                  <td class="students__profile-name">Naruto Uzumaki</td>
+                </tr>
+              </a>
+              <a [routerLink]="'/documents'" (click)="teste('kakashi')">
+                <tr class="students__profile-row">
+                  <td>
+                    <img
+                      class="students__profile-image"
+                      src="../../../assets/img/kakashi.jpg"
+                      alt="Kakashi"
+                    />
+                  </td>
+                  <td class="students__profile-name">Kakashi Hatake</td>
+                </tr>
+              </a>
+              <a [routerLink]="'/documents'" (click)="teste('gaara')">
+                <tr class="students__profile-row">
+                  <td>
+                    <img
+                      class="students__profile-image"
+                      src="../../../assets/img/gaara.jpg"
+                      alt="Gaara"
+                    />
+                  </td>
+                  <td class="students__profile-name">Gaara</td>
+                </tr>
+              </a>
+              <a [routerLink]="'/documents'" (click)="teste('rocklee')">
+                <tr class="students__profile-row">
+                  <td>
+                    <img
+                      class="students__profile-image"
+                      src="../../../assets/img/rocklee.jpg"
+                      alt="Rock Lee"
+                    />
+                  </td>
+                  <td class="students__profile-name">Rock Lee</td>
+                </tr>
+              </a>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

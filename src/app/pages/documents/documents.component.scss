@@ -1,1 +1,78 @@
 @import "../../shared/scss/main-content.scss";
+
+.student-docs {
+  &__head {
+    display: flex;
+    align-items: center;
+    margin-bottom: 45px;
+
+    &__image {
+      width: 74px;
+      border-radius: 37px;
+    }
+
+    &__name {
+      font-weight: bold;
+      margin-left: 10px;
+      font-size: 19px;
+      color: $gray-texts;
+    }
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__main-title {
+      font-weight: bold;
+      font-size: 30px;
+    }
+
+    &__name {
+      display: flex;
+      align-items: center;
+
+      &__class {
+        font-weight: bold;
+        font-size: 20px;
+        margin-right: 10px;
+        border: none;
+      }
+
+      &__class:focus-visible {
+        outline: none;
+      }
+
+      & label {
+        width: 13px;
+        height: 50px;
+        border: red 1px solid;
+        border-radius: 3px;
+        background-color: red;
+      }
+    }
+  }
+
+  &__scroll-table {
+    margin-top: 45px;
+    height: 260px;
+    overflow-y: auto;
+
+    &__row {
+      border-bottom: 1px solid $gray-texts;
+
+      &__image {
+        width: 40px;
+      }
+
+      & td {
+        padding: 23px;
+      }
+    }
+
+    &__row:last-child {
+      border: none;
+    }
+  }
+}
