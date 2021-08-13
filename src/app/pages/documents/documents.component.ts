@@ -12,7 +12,6 @@ export class DocumentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.globalVariable.studentNameGlobal;
-    this.globalVariable.studentFullNameGlobal;
   }
 
 }

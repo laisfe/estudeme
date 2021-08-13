@@ -22,7 +22,6 @@ export class StudentsComponent implements OnInit {
 
   teste(studentName: string): void {
     this.globalVariable.studentNameGlobal = studentName;
-    this.globalVariable.studentFullNameGlobal = 'Naruto Uzumaki';
   }
 
   getStudentsList(): void {
