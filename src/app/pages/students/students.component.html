@@ -8,7 +8,7 @@
         <div class="scroll-table">
           <table class="students table">
             <tbody>
-              <div *ngFor="let students of dataList; let last = last">
+              <div *ngFor="let students of studentsList; let last = last">
                 <a [routerLink]="'/documents'" (click)="teste(students.nomeAluno)">
                   <tr class="students__profile-row" [ngClass]="{'last-child': last}">
                     <img

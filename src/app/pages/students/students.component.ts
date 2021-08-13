@@ -9,7 +9,7 @@ import { StudentsService } from './students.service';
   styleUrls: ['./students.component.scss'],
 })
 export class StudentsComponent implements OnInit {
-  dataList: StudentsList[] = [];
+  studentsList: StudentsList[] = [];
 
   constructor(
     private globalVariable: GlobalVariable,
@@ -26,8 +26,8 @@ export class StudentsComponent implements OnInit {
 
   getStudentsList(): void {
     this.studentsService.getStudentsList().subscribe(
-      (response: StudentsList[]) => {
-        this.dataList = response;
+      (students: StudentsList[]) => {
+        this.studentsList = students;
       },
       (error) => {
         console.log('***error', error);
