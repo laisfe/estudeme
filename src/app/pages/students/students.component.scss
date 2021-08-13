@@ -9,16 +9,11 @@
 .students {
   &__profile-image {
     width: 76px;
-    border-radius: 38px;
   }
 
   & a:hover {
     text-decoration: none;
     cursor: pointer;
-  }
-
-  & td {
-    padding: 28px 0;
   }
 
   &__profile-name {
@@ -31,11 +26,12 @@
   }
 
   &__profile-row {
-    border-bottom: 1px solid $gray-texts !important;
+    border-bottom: 1px solid $gray-texts;
     display: flex;
+    padding: 28px 0;
   }
 
-  &__profile-row:last-child {
-    border: none;
+  & .last-child {
+    border-bottom: none;
   }
 }

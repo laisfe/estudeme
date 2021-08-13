@@ -8,54 +8,18 @@
         <div class="scroll-table">
           <table class="students table">
             <tbody>
-              <a [routerLink]="'/documents'" (click)="teste('naruto')">
-                <tr class="students__profile-row">
-                  <td>
+              <div *ngFor="let students of dataList; let last = last">
+                <a [routerLink]="'/documents'" (click)="teste('naruto')">
+                  <tr class="students__profile-row" [ngClass]="{'last-child': last}">
                     <img
                       class="students__profile-image"
-                      src="../../../assets/img/naruto.jpg"
-                      alt="Naruto"
+                      src="../../../assets/svg/person-square.svg"
+                      alt="Ícone aluno"
                     />
-                  </td>
-                  <td class="students__profile-name">Naruto Uzumaki</td>
-                </tr>
-              </a>
-              <a [routerLink]="'/documents'" (click)="teste('kakashi')">
-                <tr class="students__profile-row">
-                  <td>
-                    <img
-                      class="students__profile-image"
-                      src="../../../assets/img/kakashi.jpg"
-                      alt="Kakashi"
-                    />
-                  </td>
-                  <td class="students__profile-name">Kakashi Hatake</td>
-                </tr>
-              </a>
-              <a [routerLink]="'/documents'" (click)="teste('gaara')">
-                <tr class="students__profile-row">
-                  <td>
-                    <img
-                      class="students__profile-image"
-                      src="../../../assets/img/gaara.jpg"
-                      alt="Gaara"
-                    />
-                  </td>
-                  <td class="students__profile-name">Gaara</td>
-                </tr>
-              </a>
-              <a [routerLink]="'/documents'" (click)="teste('rocklee')">
-                <tr class="students__profile-row">
-                  <td>
-                    <img
-                      class="students__profile-image"
-                      src="../../../assets/img/rocklee.jpg"
-                      alt="Rock Lee"
-                    />
-                  </td>
-                  <td class="students__profile-name">Rock Lee</td>
-                </tr>
-              </a>
+                    <td class="students__profile-name">{{ students.nomeAluno }}</td>
+                  </tr>
+                </a>
+              </div>
             </tbody>
           </table>
         </div>

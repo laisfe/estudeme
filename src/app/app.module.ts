@@ -13,6 +13,7 @@ import { SideImageComponent } from './shared/components/side-image/side-image.co
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { GlobalVariable } from './shared/globals';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { GlobalVariable } from './shared/globals';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [GlobalVariable],
   bootstrap: [AppComponent]
