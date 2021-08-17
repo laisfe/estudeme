@@ -23,16 +23,24 @@
           <button
             class="login__login-button btn btn-primary"
             type="submit"
-            (click)="goToStudentsHomePage()"
+            (click)="loginWithRedirect()"
+            *ngIf="(auth.isAuthenticated$ | async) === false"
           >
             Login
           </button>
-          <button
+          <!-- <button
             class="login__login-button btn btn-primary"
             type="submit"
             (click)="goToSignUpPage()"
           >
             Cadastrar-se
+          </button> -->
+          <button
+            class="login__login-button btn btn-primary"
+            type="submit"
+            (click)="logout()"
+          >
+            Sair
           </button>
         </div>
       </form>

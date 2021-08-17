@@ -15,6 +15,9 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { GlobalVariable } from './shared/globals';
 import { HttpClientModule } from '@angular/common/http';
 
+import { AuthModule } from '@auth0/auth0-angular';
+import { environment as env } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,9 +34,12 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    AuthModule.forRoot({
+      ...env.auth,
+    }),
   ],
-  providers: [GlobalVariable],
+  providers: [GlobalVariable, Document],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
