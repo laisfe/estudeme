@@ -1,7 +1,3 @@
-// import { domain, clientId } from '../../auth_config.json';
-// import a, { domain, clientId } from '../../auth_config.json';
-// import domain from '../../auth_config.json';
-// import clientId from '../../auth_config.json';
 import data from '../../auth_config.json';
 
 export const environment = {
@@ -10,6 +6,6 @@ export const environment = {
   auth: {
     domain: data.domain,
     clientId: data.clientId,
-    redirectUri: `${window.location.origin}/students`
+    redirectUri: `${window.location.origin}`
   }
 };

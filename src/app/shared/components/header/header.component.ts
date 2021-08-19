@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
@@ -13,13 +13,9 @@ export class HeaderComponent {
   constructor(
     public auth: AuthService,
 
-    // @inject(DOCUMENT) 
+    @Inject(DOCUMENT)
     private doc: Document
   ) {}
-
-  // ngOnInit():void{
-
-  // }
 
   logout(): void {
     this.auth.logout({ returnTo: this.doc.location.origin });

@@ -8,39 +8,13 @@
       />
       <form action="">
         <div class="login form-group">
-          <input
-            class="login__input-label form-control"
-            type="email"
-            placeholder="E-mail"
-            required
-          />
-          <input
-            class="login__input-label form-control"
-            type="password"
-            placeholder="Senha"
-            required
-          />
           <button
             class="login__login-button btn btn-primary"
             type="submit"
             (click)="loginWithRedirect()"
             *ngIf="(auth.isAuthenticated$ | async) === false"
           >
-            Login
-          </button>
-          <!-- <button
-            class="login__login-button btn btn-primary"
-            type="submit"
-            (click)="goToSignUpPage()"
-          >
-            Cadastrar-se
-          </button> -->
-          <button
-            class="login__login-button btn btn-primary"
-            type="submit"
-            (click)="logout()"
-          >
-            Sair
+            Entrar
           </button>
         </div>
       </form>
