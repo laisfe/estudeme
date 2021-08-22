@@ -1,7 +1,9 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '@auth0/auth0-angular';
+import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/shared/authentication/authentication.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { Observable } from 'rxjs';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 @Component({
   selector: 'app-login',
@@ -9,17 +11,40 @@ import { AuthService } from '@auth0/auth0-angular';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  email: string;
+  password: string;
+  personType: string;
+  userData: Observable<firebase.User>;
+
   constructor(
-    private router: Router,
     public auth: AuthService,
-    @Inject(DOCUMENT) private doc: Document
+    public authenticationService: AuthenticationService,
   ) {}
 
   ngOnInit(): void {}
 
-  loginWithRedirect(): void {
-    this.auth.loginWithRedirect({
-      appState: { target: '/students' },
-    });
+  onItemChange(value: string) {
+    this.personType = value;
+  }
+
+  signUp() {
+    this.authenticationService.SignUp(this.email, this.password, this.personType);
+    console.log('this.email', this.email);
+    this.email = '';
+    this.password = '';
+  }
+
+  signIn() {
+    this.authenticationService.SignIn(
+      this.email,
+      this.password,
+      this.personType
+    );
+    this.email = '';
+    this.password = '';
+  }
+
+  signOut() {
+    this.authenticationService.SignOut();
   }
 }

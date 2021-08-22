@@ -1,6 +1,5 @@
-import { DOCUMENT } from '@angular/common';
 import { Component, Inject, Input } from '@angular/core';
-import { AuthService } from '@auth0/auth0-angular';
+import { AuthenticationService } from '../../authentication/authentication.service';
 
 @Component({
   selector: 'app-header',
@@ -11,13 +10,10 @@ export class HeaderComponent {
   @Input() title: string = '';
 
   constructor(
-    public auth: AuthService,
-
-    @Inject(DOCUMENT)
-    private doc: Document
+    public authenticationService: AuthenticationService
   ) {}
 
   logout(): void {
-    this.auth.logout({ returnTo: this.doc.location.origin });
+    this.authenticationService.SignOut();
   }
 }

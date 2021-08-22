@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,10 +18,8 @@ import { SideImageComponent } from './shared/components/side-image/side-image.co
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { GlobalVariable } from './shared/globals';
-import { HttpClientModule } from '@angular/common/http';
+import { environment as env, environment } from '../environments/environment';
 
-import { AuthModule } from '@auth0/auth0-angular';
-import { environment as env } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -29,17 +32,25 @@ import { environment as env } from '../environments/environment';
     SettingsComponent,
     SidebarComponent,
     SideImageComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    AuthModule.forRoot({
-      ...env.auth,
-    }),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule, 
+    AngularFirestoreModule,
+    FormsModule
   ],
-  providers: [GlobalVariable, Document],
-  bootstrap: [AppComponent]
+  exports:[
+    AngularFirestoreModule
+  ],
+  providers: [
+    GlobalVariable,
+    Document
+  ],
+
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

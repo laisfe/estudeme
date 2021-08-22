@@ -9,7 +9,7 @@
           <table class="students table">
             <tbody>
               <div *ngFor="let students of studentsList; let last = last">
-                <a [routerLink]="'/documents'" (click)="teste(students.nomeAluno)">
+                <a [routerLink]="'/documents'" (click)="passStudentName(students.nomeAluno)">
                   <tr class="students__profile-row" [ngClass]="{'last-child': last}">
                     <img
                       class="students__profile-image"

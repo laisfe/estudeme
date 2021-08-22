@@ -13,14 +13,14 @@ export class StudentsComponent implements OnInit {
 
   constructor(
     private globalVariable: GlobalVariable,
-    private studentsService: StudentsService
+    private studentsService: StudentsService,
   ) {}
 
   ngOnInit(): void {
     this.getStudentsList();
   }
 
-  teste(studentName: string): void {
+  passStudentName(studentName: string): void {
     this.globalVariable.studentNameGlobal = studentName;
   }
 
