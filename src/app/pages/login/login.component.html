@@ -1,75 +1,54 @@
 <div class="row content">
   <div class="col-md-6">
-    <section class="centralize-content-login">
+    <section class="centralize-content">
       <img
         class="logo-login"
         src="../../../assets/img/LogoMakr-2tFfwC.png"
         alt="Logo Estudeme"
       />
-      <form action="">
+      <!-- <form action=""> -->
         <div class="login form-group">
-          <!-- <button
-            id="btn-login"
+          <input
+            class="login__input-label form-control"
+            type="email"
+            placeholder="E-mail"
+            [(ngModel)]="email"
+            required
+          />
+          <input
+            class="login__input-label form-control"
+            type="password"
+            placeholder="Senha"
+            [(ngModel)]="password"
+            required
+          />
+          <button
             class="login__login-button btn btn-primary"
             type="submit"
-            (click)="authService.login()"
+            (click)="signIn()"
           >
-            Entrar
-          </button> -->
+            Login
+          </button>
+          <button
+            class="login__login-button btn btn-primary"
+            type="submit"
+            (click)="goToSignUpPage()"
+          >
+            Cadastrar-se
+          </button>
+          <button
+            class="login__login-button btn btn-primary"
+            type="submit"
+            (click)="auth.googelSignin()"
+          >
+            Login com Google
+          </button>
         </div>
-      </form>
+      <!-- </form> -->
 
       <h1 *ngIf="authenticationService.userData | async">
         Hello {{ (authenticationService.userData | async)?.email }}
       </h1>
-
-      <div>
-        <input type="text" [(ngModel)]="email" placeholder="email" />
-        <input type="password" [(ngModel)]="password" placeholder="password" />
-
-        <div class="form-check">
-          <input
-            #professor
-            class="form-check-input"
-            type="radio"
-            name="flexRadioDefault"
-            id="professor"
-            value="professor"
-            (change)="onItemChange(professor.value)"
-          />
-          <label class="form-check-label" for="professor"> Professor </label>
-        </div>
-        <div class="form-check">
-          <input
-            #aluno
-            class="form-check-input"
-            type="radio"
-            name="flexRadioDefault"
-            id="aluno"
-            value="aluno"
-            (change)="onItemChange(aluno.value)"
-          />
-          <label class="form-check-label" for="aluno"> Aluno </label>
-        </div>
-
-        <button (click)="signUp()">Sign Up</button>
-
-        <button (click)="signIn()">Login</button>
-
-      </div>
-
-      <button (click)="signOut()">Logout</button>
-
-      <div *ngIf="auth.user$ | async as user; else login">
-        {{ user | json }}
-        <hr />
-        <button class="button" (click)="auth.signOut()">Sign Out</button>
-      </div>
-      <ng-template #login>
-        <button class="button" (click)="auth.googelSignin()">
-          Login with Google
-        </button>
-      </ng-template>
     </section>
   </div>
 

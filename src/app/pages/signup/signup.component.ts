@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/shared/authentication/authentication.service';
 
 @Component({
   selector: 'app-signup',
@@ -7,7 +8,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
-  constructor(private router: Router) {}
+  email: string;
+  password: string;
+  personType: string;
+
+  constructor(
+    public authenticationService: AuthenticationService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
@@ -15,7 +23,17 @@ export class SignupComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  goToStudentsHomePage(): void {
-    this.router.navigate(['/students']);
+  signUp() {
+    this.authenticationService.SignUp(
+      this.email,
+      this.password,
+      this.personType
+    );
+    this.email = '';
+    this.password = '';
+  }
+
+  onItemChange(value: string) {
+    this.personType = value;
   }
 }

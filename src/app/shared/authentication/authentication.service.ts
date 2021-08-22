@@ -45,17 +45,7 @@ export class AuthenticationService {
       .signInWithEmailAndPassword(email, password)
       .then((res) => {
         console.log('Successfully signed in!');
-        // console.log('res', res);
-        // console.log('res.user.uid', res.user.email);
         this.router.navigate(['/students']);
-        // firebase
-        //   .database()
-        //   .ref('users/' + res.user.uid)
-        //   .set({
-        //     uid: res.user.uid,
-        //     email: email,
-        //     loginType: loginType,
-        //   });
         var starCountRef = firebase.database().ref('users/' + res.user.uid);
         starCountRef.on('value', (snapshot) => {
           const data = snapshot.val();

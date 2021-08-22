@@ -1,47 +1,71 @@
 <div class="row content">
   <div class="col-md-6">
-    <section class="centralize-content-signup">
+    <section class="centralize-content">
       <img
         class="logo-login"
         src="../../../assets/img/LogoMakr-2tFfwC.png"
         alt="Logo Estudeme"
       />
-      <form action="">
-        <div class="login form-group">
-          <input
-            class="login__input-label form-control"
-            type="email"
-            placeholder="E-mail"
-            required
-          />
-          <input
-            class="login__input-label form-control"
-            type="password"
-            placeholder="Senha"
-            required
-          />
-          <input
-            class="login__input-label form-control"
-            type="password"
-            placeholder="Confirmar senha"
-            required
-          />
-          <button
-            class="login__login-button btn btn-primary"
-            type="submit"
-            (click)="goToStudentsHomePage()"
-          >
-            Cadastrar-se
-          </button>
-          <button
-            class="login__login-button btn btn-primary"
-            type="submit"
-            (click)="goToLoginPage()"
-          >
-            Fazer Login
-          </button>
-        </div>
-      </form>
+      <div class="login form-group">
+        <input
+          class="login__input-label form-control"
+          type="email"
+          placeholder="E-mail"
+          required
+        />
+        <input
+          class="login__input-label form-control"
+          type="password"
+          placeholder="Senha"
+          required
+        />
+        <input
+          class="login__input-label form-control"
+          type="password"
+          placeholder="Confirmar senha"
+          required
+        />
+        <section class="login__radio-button">
+          <label class="mb-2"> Selecione o tipo de cadastro: </label>
+          <div class="form-check">
+            <input
+              #professor
+              type="radio"
+              name="flexRadioDefault"
+              id="professor"
+              value="professor"
+              (change)="onItemChange(professor.value)"
+            />
+            <label class="form-check-label ml-1" for="professor"> Professor </label>
+          </div>
+          <div class="form-check">
+            <input
+              #aluno
+              type="radio"
+              name="flexRadioDefault"
+              id="aluno"
+              value="aluno"
+              (change)="onItemChange(aluno.value)"
+            />
+            <label class="form-check-label ml-1" for="aluno"> Aluno </label>
+          </div>
+        </section>
+
+        <button
+          class="login__login-button btn btn-primary"
+          type="submit"
+          (click)="signUp()"
+        >
+          Cadastrar-se
+        </button>
+        <button
+          class="login__login-button btn btn-primary"
+          type="submit"
+          (click)="goToLoginPage()"
+        >
+          Fazer Login
+        </button>
+      </div>
     </section>
   </div>
 

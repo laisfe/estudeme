@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Observable } from 'rxjs';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -19,19 +20,13 @@ export class LoginComponent implements OnInit {
   constructor(
     public auth: AuthService,
     public authenticationService: AuthenticationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
 
-  onItemChange(value: string) {
-    this.personType = value;
-  }
-
-  signUp() {
-    this.authenticationService.SignUp(this.email, this.password, this.personType);
-    console.log('this.email', this.email);
-    this.email = '';
-    this.password = '';
+  goToSignUpPage(): void {
+    this.router.navigate(['/signup']);
   }
 
   signIn() {
@@ -42,9 +37,5 @@ export class LoginComponent implements OnInit {
     );
     this.email = '';
     this.password = '';
-  }
-
-  signOut() {
-    this.authenticationService.SignOut();
   }
 }
