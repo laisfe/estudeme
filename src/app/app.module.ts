@@ -18,7 +18,7 @@ import { SideImageComponent } from './shared/components/side-image/side-image.co
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { GlobalVariable } from './shared/globals';
-import { environment as env, environment } from '../environments/environment';
+import { environment } from '../environments/environment';
 
 
 @NgModule({

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import firebase from 'firebase/app';
-import { Router } from '@angular/router';
+import 'firebase/database'
 
 @Injectable({
   providedIn: 'root',
@@ -40,7 +41,7 @@ export class AuthenticationService {
   }
 
   /* Sign in */
-  SignIn(email: string, password: string, personType: string) {
+  SignIn(email: string, password: string) {
     this.angularFireAuth
       .signInWithEmailAndPassword(email, password)
       .then((res) => {
@@ -50,7 +51,6 @@ export class AuthenticationService {
         starCountRef.on('value', (snapshot) => {
           const data = snapshot.val();
           console.log('data', data)
-
         });
       })
       .catch((err) => {

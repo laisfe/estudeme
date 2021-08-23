@@ -30,11 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   signIn() {
-    this.authenticationService.SignIn(
-      this.email,
-      this.password,
-      this.personType
-    );
+    this.authenticationService.SignIn(this.email, this.password);
     this.email = '';
     this.password = '';
   }

@@ -11,18 +11,14 @@
           class="login__input-label form-control"
           type="email"
           placeholder="E-mail"
+          [(ngModel)]="email"
           required
         />
         <input
           class="login__input-label form-control"
           type="password"
           placeholder="Senha"
-          required
-        />
-        <input
-          class="login__input-label form-control"
-          type="password"
-          placeholder="Confirmar senha"
+          [(ngModel)]="password"
           required
         />
         <section class="login__radio-button">
@@ -36,7 +32,9 @@
               value="professor"
               (change)="onItemChange(professor.value)"
             />
-            <label class="form-check-label ml-1" for="professor"> Professor </label>
+            <label class="form-check-label ml-1" for="professor">
+              Professor
+            </label>
           </div>
           <div class="form-check">
             <input
