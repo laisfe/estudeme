@@ -19,6 +19,7 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
 import { HeaderComponent } from './shared/components/header/header.component';
 import { GlobalVariable } from './shared/globals';
 import { environment } from '../environments/environment';
+import { TestComponent } from './pages/test/test.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { environment } from '../environments/environment';
     SidebarComponent,
     SideImageComponent,
     HeaderComponent,
+    TestComponent,
   ],
   imports: [
     BrowserModule,
