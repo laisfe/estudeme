@@ -9,20 +9,39 @@
           Responda as questões abaixo para podermos analisar suas possíveis
           dificuldades
         </p>
-        <div *ngFor="let questions of questionsList">
-          <p>{{ questions.enunciado }}</p>
-          <div class="form-check" *ngFor="let questions of questions.alternativas | keyvalue">
-            <input
-              type="radio"
-              name="flexRadioDefault"
-              id="alternatives"
-              value="alternatives"
-            />
-            <label class="form-check-label ml-1" for="alternatives">
-              {{ questions.value }}
-            </label>
-          </div>
-        </div>
+        <section class="test__scroll-questions">
+          <form
+            *ngFor="let questions of questionsList; let first = first; let i = index"
+            class="test__questions"
+            [ngClass]="{ 'first-child': first }"
+          >
+            <p>{{ questions.enunciado }}</p>
+            <div
+              class="form-check"
+              *ngFor="let alternativas of questions.alternativas | keyvalue"
+            >
+              <input
+                #questao
+                type="radio"
+                id="questions.idQuestao"
+                name="provinha"
+                value="alternativas.value"
+                (change)="onItemChange(alternativas.value, questions.respostaCorreta)"
+              />
+              <label 
+              class="form-check-label ml-1">
+                {{ alternativas.value }}
+              </label>
+            </div>
+            <button
+              class="test__send-button btn btn-primary"
+              type="submit"
+              (click)="verifyAnswer()"
+            >
+              Responder questão
+            </button>
+          </form>
+        </section>
       </div>
     </div>
   </div>

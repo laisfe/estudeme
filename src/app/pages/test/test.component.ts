@@ -10,6 +10,9 @@ import { TestService } from './test.service';
 export class TestComponent implements OnInit {
   questionsList: QuestionsList[] = [];
   alternativesList: AlternativesList;
+  selectedAnswer: string;
+  expectedAnswer: string;
+  correctAnswer: boolean;
 
   constructor(private testService: TestService) {}
 
@@ -21,10 +24,24 @@ export class TestComponent implements OnInit {
     this.testService.getQuestionsList().subscribe(
       (questions: QuestionsList[]) => {
         this.questionsList = questions;
+        console.log('questions', questions)
       },
       (error) => {
         console.log('***error', error);
       }
     );
+  }
+
+  onItemChange(selectedAnswer: string, expectedAnswer: string) {
+    this.selectedAnswer = selectedAnswer;
+    this.expectedAnswer = expectedAnswer;
+  }
+
+  verifyAnswer(): void {
+    if (this.selectedAnswer === this.expectedAnswer) {
+      this.correctAnswer = true;
+    } else {
+      this.correctAnswer = false;
+    }
   }
 }
