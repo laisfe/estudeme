@@ -10,10 +10,12 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    margin: 77px 0;
   }
 
-  .col-md-6 {
-    height: 100% !important;
+  .form-side {
+    height: 100%;
+    overflow-y: auto;
   }
 
   .logo-login {
@@ -30,7 +32,7 @@
 
     &__input-label {
       display: flex;
-      margin-bottom: 25px;
+      margin: 25px 0;
     }
 
     &__radio-button {

@@ -19,7 +19,7 @@ export class AuthenticationService {
   }
 
   /* Sign up */
-  SignUp(email: string, password: string, personType: string) {
+  SignUp(email: string, password: string, personType: string, bornDate: Date, scholarYear: string, idClassSelected: number) {
     this.angularFireAuth
       .createUserWithEmailAndPassword(email, password)
       .then((res) => {
@@ -33,6 +33,9 @@ export class AuthenticationService {
             uid: res.user.uid,
             email: email,
             personType: personType,
+            bornDate: bornDate,
+            scholarYear: scholarYear,
+            idClassSelected: idClassSelected
           });
       })
       .catch((error) => {

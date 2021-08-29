@@ -1,6 +1,6 @@
 export interface StudentsList {
   idAluno: number;
-  nomeAluno: string;
+  nome: string;
   ano: number;
   idEscola: number;
   idTurma: number;

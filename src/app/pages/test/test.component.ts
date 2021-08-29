@@ -13,6 +13,7 @@ export class TestComponent implements OnInit {
   selectedAnswer: string;
   expectedAnswer: string;
   correctAnswer: boolean;
+  answerList: []
 
   constructor(private testService: TestService) {}
 

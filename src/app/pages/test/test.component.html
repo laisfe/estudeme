@@ -15,7 +15,7 @@
             class="test__questions"
             [ngClass]="{ 'first-child': first }"
           >
-            <p>{{ questions.enunciado }}</p>
+            <p class="test__question-title">{{ i+1 }} ) {{ questions.enunciado }}</p>
             <div
               class="form-check"
               *ngFor="let alternativas of questions.alternativas | keyvalue"

@@ -1,5 +1,5 @@
 <div class="row content">
-  <div class="col-md-6">
+  <div class="col-md-6 form-side">
     <section class="centralize-content">
       <img
         class="logo-login"
@@ -7,47 +7,112 @@
         alt="Logo Estudeme"
       />
       <div class="login form-group">
-        <input
-          class="login__input-label form-control"
-          type="email"
-          placeholder="E-mail"
-          [(ngModel)]="email"
-          required
-        />
-        <input
-          class="login__input-label form-control"
-          type="password"
-          placeholder="Senha"
-          [(ngModel)]="password"
-          required
-        />
-        <section class="login__radio-button">
-          <label class="mb-2"> Selecione o tipo de cadastro: </label>
-          <div class="form-check">
-            <input
-              #professor
-              type="radio"
-              name="flexRadioDefault"
-              id="professor"
-              value="professor"
-              (change)="onItemChange(professor.value)"
-            />
-            <label class="form-check-label ml-1" for="professor">
-              Professor
+        <form class="login__radio-button">
+          <input
+            class="login__input-label form-control"
+            type="email"
+            placeholder="E-mail"
+            [(ngModel)]="email"
+            name="email"
+            required
+          />
+          <input
+            class="login__input-label form-control"
+            type="password"
+            placeholder="Senha"
+            [(ngModel)]="password"
+            name="password"
+            required
+          />
+          <input
+            class="login__input-label form-control"
+            type="date"
+            placeholder="Data de nascimento"
+            [(ngModel)]="bornDate"
+            name="date"
+            required
+          />
+          <section class="radio-input">
+            <label class="mb-2"> Selecione o tipo de cadastro: </label>
+            <div class="form-check">
+              <input
+                #professor
+                type="radio"
+                name="personType"
+                id="professor"
+                value="professor"
+                (change)="onItemChangePersonType(professor.value)"
+              />
+              <label class="form-check-label ml-1" for="professor">
+                Professor
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                #aluno
+                type="radio"
+                name="personType"
+                id="aluno"
+                value="aluno"
+                (change)="onItemChangePersonType(aluno.value)"
+              />
+              <label class="form-check-label ml-1" for="aluno"> Aluno </label>
+            </div>
+          </section>
+
+          <section class="radio-input">
+            <label class="mb-2 radio-input">
+              Selecione seu período escolar atual:
             </label>
-          </div>
-          <div class="form-check">
-            <input
-              #aluno
-              type="radio"
-              name="flexRadioDefault"
-              id="aluno"
-              value="aluno"
-              (change)="onItemChange(aluno.value)"
-            />
-            <label class="form-check-label ml-1" for="aluno"> Aluno </label>
-          </div>
-        </section>
+            <div class="form-check">
+              <input
+                #ano1
+                type="radio"
+                name="scholarYear"
+                id="ano1"
+                value="1"
+                (change)="onItemChangeScholarYear(ano1.value)"
+              />
+              <label class="form-check-label ml-1" for="ano1"> 1° Ano </label>
+            </div>
+            <div class="form-check">
+              <input
+                #ano2
+                type="radio"
+                name="scholarYear"
+                id="ano2"
+                value="2"
+                (change)="onItemChangeScholarYear(ano2.value)"
+              />
+              <label class="form-check-label ml-1" for="ano2"> 2° Ano </label>
+            </div>
+            <div class="form-check">
+              <input
+                #ano3
+                type="radio"
+                name="scholarYear"
+                id="ano3"
+                value="3"
+                (change)="onItemChangeScholarYear(ano3.value)"
+              />
+              <label class="form-check-label ml-1" for="ano3"> 3° Ano </label>
+            </div>
+          </section>
+
+          <section class="radio-input">
+            <label class="mb-2 radio-input"> Selecione sua turma: </label>
+            <div class="form-check" *ngFor="let classes of classesList">
+              <input
+                type="radio"
+                name="class"
+                id="classes.idTurma"
+                value="classes.nome"
+                (change)="onItemChangeClasses(classes.idTurma)"
+              />
+              <label class="form-check-label ml-1"> {{ classes.nome }} </label>
+            </div>
+          </section>
+        </form>
 
         <button
           class="login__login-button btn btn-primary"
