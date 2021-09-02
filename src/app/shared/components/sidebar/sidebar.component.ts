@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { GlobalVariable } from '../../globals';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,6 +8,12 @@ import { Component, Input } from '@angular/core';
 })
 export class SidebarComponent {
   @Input() route: string = '';
+
+  constructor(public globalVariable: GlobalVariable) {}
+
+  ngOnInit(): void{
+    this.globalVariable.personType;
+  }
 
   routeReturn(): string {
     return this.route;

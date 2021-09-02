@@ -136,7 +136,7 @@
             </div>
           </section>
 
-          <section *ngIf="personType === 'aluno' && scholarYear && class.ano == scholarYear" class="radio-input">
+          <section *ngIf="personType === 'aluno' && scholarYear && class?.ano === scholarYear" class="radio-input">
             <label class="mb-2 radio-input"> Selecione sua turma: </label>
             <div class="form-check">
               <input

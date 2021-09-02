@@ -9,6 +9,7 @@ import {
   TeacherRegistration,
 } from '../models/registration';
 import { SignupService } from 'src/app/services/signup.service';
+import { GlobalVariable } from '../globals';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,8 @@ export class AuthenticationService {
   constructor(
     private angularFireAuth: AngularFireAuth,
     private router: Router,
-    private signupService: SignupService
+    private signupService: SignupService,
+    public globalVariable: GlobalVariable
   ) {
     this.userData = angularFireAuth.authState;
   }
@@ -42,24 +44,23 @@ export class AuthenticationService {
       .createUserWithEmailAndPassword(email, password)
       .then((res) => {
         console.log('Successfully signed up!', res);
-        // firebase
-        //   .database()
-        //   .ref('users/' + res.user.uid)
-        //   .set({
-        //     uid: res.user.uid,
-        //     email: email,
-        //     personType: personType,
-        //     bornDate: bornDate,
-        //     scholarYear: scholarYear,
-        //     idTurma: idTurma,
-        //     idInstituicao: idInstituicao,
-        //     nome: nome,
-        //   });
-        // var starCountRef = firebase.database().ref('users/' + res.user.uid);
-        // starCountRef.on('value', (snapshot) => {
-        //   const data = snapshot.val();
-        //   console.log('data', data);
-        // });
+        firebase
+          .database()
+          .ref('users/' + res.user.uid)
+          .set({
+            uid: res.user.uid,
+            email: email,
+            personType: personType,
+            bornDate: bornDate,
+            scholarYear: scholarYear,
+            idTurma: idTurma,
+            idInstituicao: idInstituicao,
+            nome: nome,
+          });
+        var starCountRef = firebase.database().ref('users/' + res.user.uid);
+        starCountRef.on('value', (snapshot) => {
+          const data = snapshot.val();
+        });
         if (personType === 'aluno') {
           this.studentRegistration = {
             nome: nome,
@@ -75,6 +76,7 @@ export class AuthenticationService {
               console.log('error', error);
             }
           );
+          this.router.navigate(['/documents']);
         } else {
           this.teacherRegistration = {
             nome: nome,
@@ -88,8 +90,8 @@ export class AuthenticationService {
               console.log('error');
             }
           );
+          this.router.navigate(['/students']);
         }
-        this.router.navigate(['/students']);
       })
       .catch((error) => {
         console.log('Something is wrong:', error.message);

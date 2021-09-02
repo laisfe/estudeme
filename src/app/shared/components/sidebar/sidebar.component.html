@@ -6,6 +6,7 @@
   />
 
   <section
+    *ngIf="globalVariable?.personType === 'professor'"
     class="sidebar-content__section-division"
     [ngClass]="{ students: routeReturn() === '/students' }"
   >
