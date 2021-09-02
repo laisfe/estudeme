@@ -1,42 +1,95 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import firebase from 'firebase/app';
-import 'firebase/database'
+import 'firebase/database';
+import {
+  StudentRegistration,
+  TeacherRegistration,
+} from '../models/registration';
+import { SignupService } from 'src/app/services/signup.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
   userData: Observable<firebase.User>;
+  public studentRegistration: StudentRegistration;
+  public teacherRegistration: TeacherRegistration;
 
   constructor(
     private angularFireAuth: AngularFireAuth,
-    private router: Router
+    private router: Router,
+    private signupService: SignupService
   ) {
     this.userData = angularFireAuth.authState;
   }
 
   /* Sign up */
-  SignUp(email: string, password: string, personType: string, bornDate: Date, scholarYear: string, idClassSelected: number) {
+  SignUp(
+    email: string,
+    password: string,
+    personType: string,
+    bornDate: Date,
+    scholarYear: number,
+    idTurma: number,
+    idInstituicao: number,
+    nome: string,
+    idDisciplina: number
+  ) {
     this.angularFireAuth
       .createUserWithEmailAndPassword(email, password)
       .then((res) => {
         console.log('Successfully signed up!', res);
-        console.log('***res', res);
         this.router.navigate(['/students']);
-        firebase
-          .database()
-          .ref('users/' + res.user.uid)
-          .set({
-            uid: res.user.uid,
+        // firebase
+        //   .database()
+        //   .ref('users/' + res.user.uid)
+        //   .set({
+        //     uid: res.user.uid,
+        //     email: email,
+        //     personType: personType,
+        //     bornDate: bornDate,
+        //     scholarYear: scholarYear,
+        //     idTurma: idTurma,
+        //     idInstituicao: idInstituicao,
+        //     nome: nome,
+        //   });
+        // var starCountRef = firebase.database().ref('users/' + res.user.uid);
+        // starCountRef.on('value', (snapshot) => {
+        //   const data = snapshot.val();
+        //   console.log('data', data);
+        // });
+        if (personType === 'aluno') {
+          this.studentRegistration = {
+            nome: nome,
+            ano: scholarYear,
+            nascimento: bornDate,
+            idIns: idInstituicao,
+            idTurma: idTurma,
             email: email,
-            personType: personType,
-            bornDate: bornDate,
-            scholarYear: scholarYear,
-            idClassSelected: idClassSelected
-          });
+          };
+          this.signupService.putNewStudent(this.studentRegistration).subscribe(
+            () => {},
+            (error) => {
+              console.log('error', error);
+            }
+          );
+        } else {
+          this.teacherRegistration = {
+            nome: nome,
+            idInstituicao: idInstituicao,
+            idDisciplina: idDisciplina,
+            email: email,
+          };
+          this.signupService.putNewTeacher(this.teacherRegistration).subscribe(
+            () => {},
+            (error) => {
+              console.log('error');
+            }
+          );
+        }
       })
       .catch((error) => {
         console.log('Something is wrong:', error.message);
@@ -48,12 +101,12 @@ export class AuthenticationService {
     this.angularFireAuth
       .signInWithEmailAndPassword(email, password)
       .then((res) => {
-        console.log('Successfully signed in!');
+        console.log('Successfully signed in!', res);
         this.router.navigate(['/students']);
         var starCountRef = firebase.database().ref('users/' + res.user.uid);
         starCountRef.on('value', (snapshot) => {
           const data = snapshot.val();
-          console.log('data', data)
+          console.log('data', data);
         });
       })
       .catch((err) => {

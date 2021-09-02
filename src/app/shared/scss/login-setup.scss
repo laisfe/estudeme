@@ -5,12 +5,11 @@
   height: 100%;
 
   .centralize-content {
-    margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    margin: 77px 0;
+    margin: 125px 0;
   }
 
   .form-side {
@@ -27,6 +26,7 @@
 
   .login {
     margin: 0 auto;
+    width: 280px;
     max-width: 375px;
     min-width: 260px;
 
