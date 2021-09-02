@@ -24,6 +24,7 @@ export class SignupComponent implements OnInit {
   nome: string;
   idDisciplina: number;
   subjectList: Subject[];
+  class: ClassesList;
 
   constructor(
     public authenticationService: AuthenticationService,
@@ -41,6 +42,17 @@ export class SignupComponent implements OnInit {
     this.signupService.getClassList().subscribe(
       (classes: ClassesList[]) => {
         this.classesList = classes;
+      },
+      (error) => {
+        console.log('***error', error);
+      }
+    );
+  }
+
+  getClassListById(scholarYear: number): void {
+    this.signupService.getClassListById(scholarYear).subscribe(
+      (classe: ClassesList) => {
+        this.class = classe;
       },
       (error) => {
         console.log('***error', error);
@@ -102,6 +114,7 @@ export class SignupComponent implements OnInit {
 
   onItemChangeScholarYear(value: string): void {
     this.scholarYear = Number(value);
+    this.getClassListById(this.scholarYear);
   }
 
   onItemChangeClasses(value: number): void {

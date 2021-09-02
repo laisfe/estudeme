@@ -15,6 +15,10 @@ export class SignupService {
     return this.http.get<ClassesList[]>(`${environment.SERVER_URL}/turma`);
   }
 
+  getClassListById(data: number): Observable<ClassesList> {
+    return this.http.get<ClassesList>(`${environment.SERVER_URL}/turma/${data}`);
+  }
+
   getSchoolsList(): Observable<SchoolsList[]> {
     return this.http.get<SchoolsList[]>(`${environment.SERVER_URL}/instituicao`);
   }

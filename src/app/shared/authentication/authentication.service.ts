@@ -42,7 +42,6 @@ export class AuthenticationService {
       .createUserWithEmailAndPassword(email, password)
       .then((res) => {
         console.log('Successfully signed up!', res);
-        this.router.navigate(['/students']);
         // firebase
         //   .database()
         //   .ref('users/' + res.user.uid)
@@ -90,6 +89,7 @@ export class AuthenticationService {
             }
           );
         }
+        this.router.navigate(['/students']);
       })
       .catch((error) => {
         console.log('Something is wrong:', error.message);

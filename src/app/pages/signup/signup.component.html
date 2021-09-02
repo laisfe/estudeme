@@ -136,17 +136,17 @@
             </div>
           </section>
 
-          <section *ngIf="personType === 'aluno' && scholarYear" class="radio-input">
+          <section *ngIf="personType === 'aluno' && scholarYear && class.ano == scholarYear" class="radio-input">
             <label class="mb-2 radio-input"> Selecione sua turma: </label>
-            <div class="form-check" *ngFor="let classes of classesList">
+            <div class="form-check">
               <input
                 type="radio"
                 name="class"
-                id="classes.idTurma"
-                value="classes.nome"
-                (change)="onItemChangeClasses(classes.idTurma)"
+                id="class.idTurma"
+                value="class.nome"
+                (change)="onItemChangeClasses(class.idTurma)"
               />
-              <label class="form-check-label ml-1"> {{ classes.nome }} </label>
+              <label class="form-check-label ml-1"> {{ class.nome }} </label>
             </div>
           </section>
         </form>
