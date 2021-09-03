@@ -16,10 +16,25 @@
           </h4>
         </section>
 
-        <!-- <div class="custom-file">
-          <input type="file" class="custom-file-input" id="customFile" (change)="onChange($event)">
-          <label class="custom-file-label" for="customFile" id="customFileLabel">Choose file</label>
-        </div> -->
+        <div class="custom-file">
+          <input
+            type="file"
+            class="custom-file-input"
+            id="customFile"
+            (change)="onChange($event)"
+          />
+          <label class="custom-file-label" for="customFile" id="customFileLabel"
+            >Choose file</label
+          >
+        </div>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="onUpload()"
+          [disabled]="!files"
+        >
+          Upload
+        </button>
 
         <section class="student-docs__title">
           <h2 class="student-docs__title__main-title">Upload de atividades</h2>

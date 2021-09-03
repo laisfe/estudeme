@@ -9,4 +9,5 @@ export const environment = {
     storageBucket: 'estudeme-63a8c.appspot.com',
     messagingSenderId: '813310012092',
   },
+  BASE_URL: '/api',
 };
