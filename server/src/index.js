@@ -1,27 +1,29 @@
-const express = require('express');
-// const cors = require('cors');
-// const bodyParser = require('body-parser');
-const multipart = require('connect-multiparty');
+// const multipart = require('connect-multiparty');
 
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-// const corsOptions = {
-//   origin: '*',
-//   optionsSuccessStatus: 200
-// };
-// app.use(cors(corsOptions));
+// const multipartMiddleware = multipart({ uploadDir: './documents' });
+// app.post('/documents', multipartMiddleware, (req, res) => {
+//   const files = req.files;
+//   console.log(files);
+//   res.json({ message: files });
+// })
 
-const multipartMiddleware = multipart({ uploadDir: './documents' });
-app.post('/documents', multipartMiddleware, (req, res) => {
-  const files = req.files;
-  console.log(files);
-  res.json({ message: files });
+// app.use((err, req, res, next) => res.json({ error: err.message }))
+
+const customExpress = require('../config/customExpress')
+const connection = require('../infra/connection')
+
+connection.connect(error => {
+  if (error) {
+    console.log(error)
+  } else {
+    console.log('conectado com sucesso')
+    
+    const app = customExpress();
+
+    app.listen(8000, () => {
+      console.log('Servidor porta 8000');
+    })
+  }
 })
 
-app.use((err, req, res, next) => res.json({ error: err.message }))
-
-app.listen(8000, () => {
-  console.log('Servidor porta 8000');
-})
