@@ -3,9 +3,8 @@ const connection = require('../infra/connection')
 const documentUpload = require('../documents/documentUpload')
 
 class Documents {
-  add(doc, res, fileName) {
+  add(doc, res) {
     const date = moment().format('YYYY-MM-DD HH:mm:ss')
-    const actualDate = { ...doc, date }
 
     const sql = 'INSERT INTO Documents SET ?'
 

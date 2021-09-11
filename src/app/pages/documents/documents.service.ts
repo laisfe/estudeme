@@ -13,4 +13,10 @@ export class DocumentsService {
     const request = new HttpRequest('POST', url, formData);
     return this.http.request(request);
   }
+
+  select(url: string) {
+    const formData = new FormData();
+    const request = new HttpRequest('GET', url, formData);
+    return this.http.request(request);
+  }
 }
