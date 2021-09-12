@@ -12,13 +12,6 @@
           </h4>
         </section>
 
-        <div class="custom-file">
-          <input type="file" class="custom-file-input" id="customFile" (change)="onChange($event)" />
-          <label class="custom-file-label" for="customFile" id="customFileLabel">Choose file</label>
-        </div>
-        <button type="button" class="btn btn-primary" (click)="onUpload()" [disabled]="!files">
-          Upload
-        </button>
 
         <section class="student-docs__title">
           <h2 class="student-docs__title__main-title">Upload de atividades</h2>
@@ -32,10 +25,12 @@
         </section>
 
         <section class="student-docs__docs-button">
-          <button>Upload de arquivo</button>
-          <button>Criar atividade</button>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile" (change)="onChange($event)" />
+            <label class="custom-file-label" for="customFile" id="customFileLabel">Selecione um arquivo</label>
+          </div>
+          <button (click)="onUpload()" [disabled]="!files">Upload de arquivo</button>
         </section>
-
         <div class="student-docs__scroll-table">
           <table class="table">
             <tbody>

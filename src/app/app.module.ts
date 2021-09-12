@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -43,7 +43,8 @@ import { TestComponent } from './pages/test/test.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule, 
     AngularFirestoreModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports:[
     AngularFirestoreModule

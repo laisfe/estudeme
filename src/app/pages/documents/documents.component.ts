@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { GlobalVariable } from '../../shared/globals';
 import { DocumentsService } from './documents.service';
@@ -10,13 +12,22 @@ import { Documents } from './models/documents';
   styleUrls: ['./documents.component.scss'],
 })
 export class DocumentsComponent implements OnInit {
+
   files: Set<File>;
   documentsList: Documents[];
 
+
+
   constructor(
     public globalVariable: GlobalVariable,
-    private service: DocumentsService
+    private service: DocumentsService,
+    private fb: FormBuilder,
+    private router: Router
   ) { }
+
+  inputFilesForm = this.fb.group({
+    inputFile: ['', Validators.required]
+  });
 
   ngOnInit(): void {
     this.globalVariable.studentNameGlobal;
@@ -35,12 +46,14 @@ export class DocumentsComponent implements OnInit {
     if (this.files && this.files.size > 0) {
       this.service
         .upload(this.files, environment.BASE_URL + '/documents')
-        .subscribe(() => { });
+        .subscribe(() => {
+
+        });
+      window.location.reload()
     }
   }
 
   returnFiles(): void {
-    console.log('entrei no returnFiles')
     this.service.select(environment.BASE_URL + '/documents')
       .subscribe((documents) => {
         this.documentsList = documents['body'];

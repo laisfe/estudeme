@@ -57,19 +57,42 @@
   &__docs-button {
     margin-bottom: 25px;
 
+    & .custom-file {
+      margin-bottom: 15px;
+    }
+
+    & .custom-file-label {
+      border: 1px solid #e0e0e0;
+      padding: 6px;
+    }
+
+    & .custom-file-label::after {
+      content: "Procurar";
+    }
+
     & button {
       margin-right: 15px;
       background-color: #ffffff;
       color: $green-estudeme;
       font-weight: bold;
       border: 3px solid $green-estudeme;
-      border-radius: 10px;
+      border-radius: 5px;
       cursor: pointer;
     }
 
     & button:hover {
       background-color: $green-estudeme;
       color: #ffffff;
+    }
+
+    & button:disabled {
+      margin-right: 15px;
+      background-color: #fbfbfb;
+      color: #84ff8e;
+      font-weight: bold;
+      border: 3px solid #84ff8e;
+      border-radius: 5px;
+      cursor: auto;
     }
   }
 
