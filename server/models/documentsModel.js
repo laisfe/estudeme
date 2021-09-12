@@ -2,7 +2,7 @@ const moment = require('moment')
 const connection = require('../infra/connection')
 const documentUpload = require('../documents/documentUpload')
 
-class Documents {
+class DocumentsModel {
   add(doc, res) {
     const date = moment().format('YYYY-MM-DD HH:mm:ss')
 
@@ -41,10 +41,10 @@ class Documents {
       if (error) {
         res.status(400).json(error)
       } else {
-        res.status(200).json(document)
+        res.download(document.file)
       }
     })
   }
 }
 
-module.exports = new Documents()
+module.exports = new DocumentsModel()

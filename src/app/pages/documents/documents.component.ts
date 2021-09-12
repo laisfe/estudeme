@@ -43,8 +43,17 @@ export class DocumentsComponent implements OnInit {
     console.log('entrei no returnFiles')
     this.service.select(environment.BASE_URL + '/documents')
       .subscribe((documents) => {
-        console.log('documents', documents['body'])
         this.documentsList = documents['body'];
+      }, (error) => {
+        console.log('error', error)
+      })
+  }
+
+  onDownloadFile(id: number, documentName: string): void {
+    this.service.download(environment.BASE_URL + `/documents/${id}`)
+      .subscribe((response: any) => {
+        const documentNameSplitted = documentName.split('/')[2]
+        this.service.handleFile(response, documentNameSplitted);
       }, (error) => {
         console.log('error', error)
       })

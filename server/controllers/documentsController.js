@@ -1,4 +1,4 @@
-const Documents = require('../models/documents')
+const Documents = require('../models/documentsModel')
 const multipart = require('connect-multiparty');
 const fs = require('fs')
 

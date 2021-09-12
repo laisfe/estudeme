@@ -47,8 +47,10 @@
                 <td>{{ documents.documentName }}</td>
                 <td>{{ documents.date | date:'shortDate' }}</td>
                 <td>
-                  <img class="student-docs__scroll-table__row__image" src="../../../assets/svg/download.svg"
-                    alt="Download ícone" />
+                  <a (click)="onDownloadFile(documents.id, documents.file)">
+                    <img class="student-docs__scroll-table__row__image" src="../../../assets/svg/download.svg"
+                      alt="Download ícone" />
+                  </a>
                 </td>
                 <td>
                   <img class="student-docs__scroll-table__row__image" src="../../../assets/svg/trash.svg"
