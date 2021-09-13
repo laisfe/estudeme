@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GlobalVariable } from '../../shared/globals';
-import { StudentsList } from './models/students-types';
-import { StudentsService } from './students.service';
+import { StudentsList } from '../../shared/models/students-types';
+import { StudentsService } from '../../shared/services/students.service';
 
 @Component({
   selector: 'app-students',

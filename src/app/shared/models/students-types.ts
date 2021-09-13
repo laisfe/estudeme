@@ -2,6 +2,8 @@ export interface StudentsList {
   idAluno: number;
   nome: string;
   ano: number;
-  idEscola: number;
+  nascimento: Date;
+  idIns: number;
   idTurma: number;
+  email: string
 }

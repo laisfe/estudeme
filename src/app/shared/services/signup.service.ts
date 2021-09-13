@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import {
   StudentRegistration,
   TeacherRegistration,
-} from '../shared/models/registration';
+} from '../models/registration';
 
 @Injectable({
   providedIn: 'root',

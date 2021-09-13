@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -8,14 +8,14 @@ import {
   StudentRegistration,
   TeacherRegistration,
 } from '../models/registration';
-import { SignupService } from 'src/app/services/signup.service';
+import { SignupService } from 'src/app/shared/services/signup.service';
 import { GlobalVariable } from '../globals';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
-  userData: Observable<firebase.User>;
+  public userData: Observable<firebase.User>;
   public studentRegistration: StudentRegistration;
   public teacherRegistration: TeacherRegistration;
 
@@ -57,10 +57,6 @@ export class AuthenticationService {
             idInstituicao: idInstituicao,
             nome: nome,
           });
-        var starCountRef = firebase.database().ref('users/' + res.user.uid);
-        starCountRef.on('value', (snapshot) => {
-          const data = snapshot.val();
-        });
         if (personType === 'aluno') {
           this.studentRegistration = {
             nome: nome,
@@ -70,12 +66,12 @@ export class AuthenticationService {
             idTurma: idTurma,
             email: email,
           };
-          this.signupService.putNewStudent(this.studentRegistration).subscribe(
-            () => {},
-            (error) => {
+          this.signupService.putNewStudent(this.studentRegistration)
+            .subscribe(() => {
+            }, (error) => {
               console.log('error', error);
             }
-          );
+            );
           this.router.navigate(['/documents']);
         } else {
           this.teacherRegistration = {
@@ -85,9 +81,9 @@ export class AuthenticationService {
             email: email,
           };
           this.signupService.putNewTeacher(this.teacherRegistration).subscribe(
-            () => {},
+            () => { },
             (error) => {
-              console.log('error');
+              console.log('error', error);
             }
           );
           this.router.navigate(['/students']);
@@ -103,12 +99,15 @@ export class AuthenticationService {
     this.angularFireAuth
       .signInWithEmailAndPassword(email, password)
       .then((res) => {
-        console.log('Successfully signed in!', res);
-        this.router.navigate(['/students']);
         var starCountRef = firebase.database().ref('users/' + res.user.uid);
         starCountRef.on('value', (snapshot) => {
           const data = snapshot.val();
-          console.log('data', data);
+          console.log('data', data)
+          if (data.personType === 'aluno') {
+            this.router.navigate(['/documents']);
+          } else {
+            this.router.navigate(['/students']);
+          }
         });
       })
       .catch((err) => {

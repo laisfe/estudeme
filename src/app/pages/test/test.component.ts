@@ -18,10 +18,10 @@ export class TestComponent implements OnInit {
   constructor(private testService: TestService) {}
 
   ngOnInit(): void {
-    this.getStudentsList();
+    this.getQuestionsList();
   }
 
-  getStudentsList(): void {
+  getQuestionsList(): void {
     this.testService.getQuestionsList().subscribe(
       (questions: QuestionsList[]) => {
         this.questionsList = questions;

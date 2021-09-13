@@ -1,63 +1,39 @@
 <nav class="sidebar-content nav flex-column">
-  <img
-    class="sidebar-content__icon-estudeme"
-    src="../../../assets/img/LogoMakr-2tFfwC.png"
-    alt="Logo Estudeme"
-  />
+  <img class="sidebar-content__icon-estudeme" src="../../../assets/img/LogoMakr-2tFfwC.png" alt="Logo Estudeme" />
 
-  <section
-    *ngIf="globalVariable?.personType === 'professor'"
-    class="sidebar-content__section-division"
-    [ngClass]="{ students: routeReturn() === '/students' }"
-  >
+  <section *ngIf="globalVariable?.personType === 'aluno'" class="sidebar-content__section-division"
+    [ngClass]="{ documents: routeReturn() === '/documents' }">
+    <a href="/documents">
+      <img class="sidebar-content__icon" src="../../../assets/svg/people.svg" alt="Ícone estudantes" />
+      <label class="sidebar-content__description" for="">Documentos</label>
+    </a>
+  </section>
+
+  <section *ngIf="globalVariable?.personType === 'professor'" class="sidebar-content__section-division"
+    [ngClass]="{ students: routeReturn() === '/students' }">
     <a href="/students">
-      <img
-        class="sidebar-content__icon"
-        src="../../../assets/svg/people.svg"
-        alt="Ícone estudantes"
-      />
+      <img class="sidebar-content__icon" src="../../../assets/svg/people.svg" alt="Ícone estudantes" />
       <label class="sidebar-content__description" for="">Alunos</label>
     </a>
   </section>
 
-  <section
-    class="sidebar-content__section-division"
-    [ngClass]="{ test: routeReturn() === '/test' }"
-  >
+  <section *ngIf="globalVariable?.personType === 'aluno'" class="sidebar-content__section-division" [ngClass]="{ test: routeReturn() === '/test' }">
     <a href="/test">
-      <img
-        class="sidebar-content__icon"
-        src="../../../assets/svg/ui-checks.svg"
-        alt="Ícone documentos"
-      />
+      <img class="sidebar-content__icon" src="../../../assets/svg/ui-checks.svg" alt="Ícone documentos" />
       <label class="sidebar-content__description" for="">Prova</label>
     </a>
   </section>
 
-  <section
-    class="sidebar-content__section-division"
-    [ngClass]="{ reports: routeReturn() === '/reports' }"
-  >
+  <section class="sidebar-content__section-division" [ngClass]="{ reports: routeReturn() === '/reports' }">
     <a href="/reports">
-      <img
-        class="sidebar-content__icon"
-        src="../../../assets/svg/file-text.svg"
-        alt="Ícone relatórios"
-      />
+      <img class="sidebar-content__icon" src="../../../assets/svg/file-text.svg" alt="Ícone relatórios" />
       <label class="sidebar-content__description" for="">Relatórios</label>
     </a>
   </section>
 
-  <section
-    class="sidebar-content__section-division"
-    [ngClass]="{ settings: routeReturn() === '/settings' }"
-  >
+  <section class="sidebar-content__section-division" [ngClass]="{ settings: routeReturn() === '/settings' }">
     <a href="settings">
-      <img
-        class="sidebar-content__icon"
-        src="../../../assets/svg/gear.svg"
-        alt="Ícone configurações"
-      />
+      <img class="sidebar-content__icon" src="../../../assets/svg/gear.svg" alt="Ícone configurações" />
       <label class="sidebar-content__description" for="">Configurações</label>
     </a>
   </section>

@@ -1,49 +1,19 @@
 <div class="row content">
   <div class="col-md-6">
     <section class="centralize-content">
-      <img
-        class="logo-login"
-        src="../../../assets/img/LogoMakr-2tFfwC.png"
-        alt="Logo Estudeme"
-      />
+      <img class="logo-login" src="../../../assets/img/LogoMakr-2tFfwC.png" alt="Logo Estudeme" />
       <!-- <form action=""> -->
-        <div class="login form-group">
-          <input
-            class="login__input-label form-control"
-            type="email"
-            placeholder="E-mail"
-            [(ngModel)]="email"
-            required
-          />
-          <input
-            class="login__input-label form-control"
-            type="password"
-            placeholder="Senha"
-            [(ngModel)]="password"
-            required
-          />
-          <button
-            class="login__login-button btn btn-primary"
-            type="submit"
-            (click)="signIn()"
-          >
-            Login
-          </button>
-          <button
-            class="login__login-button btn btn-primary"
-            type="submit"
-            (click)="goToSignUpPage()"
-          >
-            Cadastrar-se
-          </button>
-          <button
-            class="login__login-button btn btn-primary"
-            type="submit"
-            (click)="auth.googelSignin()"
-          >
-            Login com Google
-          </button>
-        </div>
+      <div class="login form-group">
+        <input class="login__input-label form-control" type="email" placeholder="E-mail" [(ngModel)]="email" required />
+        <input class="login__input-label form-control" type="password" placeholder="Senha" [(ngModel)]="password"
+          required />
+        <button class="login__login-button btn btn-primary" type="submit" (click)="signIn()">
+          Login
+        </button>
+        <button class="login__login-button btn btn-primary" type="submit" (click)="goToSignUpPage()">
+          Cadastrar-se
+        </button>
+      </div>
       <!-- </form> -->
 
       <h1 *ngIf="authenticationService.userData | async">

@@ -1,8 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { StudentsList } from 'src/app/shared/models/students-types';
+import { StudentsService } from 'src/app/shared/services/students.service';
 import { environment } from 'src/environments/environment';
-import { GlobalVariable } from '../../shared/globals';
 import { DocumentsService } from './documents.service';
 import { Documents } from './models/documents';
 
@@ -15,23 +15,18 @@ export class DocumentsComponent implements OnInit {
 
   files: Set<File>;
   documentsList: Documents[];
-
-
+  studentsList: StudentsList[] = [];
+  studentName: string;
 
   constructor(
-    public globalVariable: GlobalVariable,
     private service: DocumentsService,
-    private fb: FormBuilder,
-    private router: Router
+    private studentsService: StudentsService,
+    private angularFireAuth: AngularFireAuth
   ) { }
 
-  inputFilesForm = this.fb.group({
-    inputFile: ['', Validators.required]
-  });
-
   ngOnInit(): void {
-    this.globalVariable.studentNameGlobal;
     this.returnFiles();
+    this.searchStudent();
   }
 
   onChange(event): void {
@@ -47,9 +42,8 @@ export class DocumentsComponent implements OnInit {
       this.service
         .upload(this.files, environment.BASE_URL + '/documents')
         .subscribe(() => {
-
+          window.location.reload()
         });
-      window.location.reload()
     }
   }
 
@@ -70,5 +64,23 @@ export class DocumentsComponent implements OnInit {
       }, (error) => {
         console.log('error', error)
       })
+  }
+
+  searchStudent(): void {
+    this.studentsService.getStudentsList().subscribe(
+      async (students: StudentsList[]) => {
+        this.studentsList = students;
+        const emailUser = (await this.angularFireAuth.currentUser).email
+        this.studentsList.forEach(element => {
+          if (element.email === emailUser) {
+            this.studentName = element.nome;
+          }
+        });
+      },
+      (error) => {
+        console.log('***error', error);
+      }
+    );
+
   }
 }
