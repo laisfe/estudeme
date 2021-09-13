@@ -5,6 +5,9 @@ import { SignupService } from './signup.service';
 import { AuthenticationService } from 'src/app/shared/authentication/authentication.service';
 import { SchoolsList } from './models/schools';
 import { Subject } from './models/subject';
+import { GlobalVariable } from 'src/app/shared/globals';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 @Component({
   selector: 'app-signup',
@@ -29,10 +32,30 @@ export class SignupComponent implements OnInit {
   constructor(
     public authenticationService: AuthenticationService,
     private router: Router,
-    private signupService: SignupService
-  ) {}
+    private signupService: SignupService,
+    public globalVariable: GlobalVariable
+  ) { }
 
   ngOnInit(): void {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in
+        var starCountRef = firebase.database().ref('users/' + user.uid);
+        starCountRef.on('value', (snapshot) => {
+          const data = snapshot.val();
+          this.globalVariable.personType = data.personType;
+        });
+        if (this.globalVariable.personType === 'professor') {
+          this.router.navigate(['/students']);
+        } else {
+          this.router.navigate(['/documents']);
+        }
+      } else {
+        // User is signed out
+        this.router.navigate(['/']);
+      }
+    });
+
     this.getClassList();
     this.getSchoolsList();
     this.getSubjectList();
