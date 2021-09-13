@@ -12,7 +12,7 @@ import { GlobalVariable } from './shared/globals';
 export class AppComponent {
   title = 'estudeme';
 
-  constructor(private router: Router, public globalVariable: GlobalVariable) {}
+  constructor(private router: Router, public globalVariable: GlobalVariable) { }
 
   ngOnInit(): void {
     firebase.initializeApp(environment.firebase);
@@ -24,11 +24,11 @@ export class AppComponent {
           const data = snapshot.val();
           this.globalVariable.personType = data.personType;
         });
-        if (this.globalVariable.personType === 'professor') {
-          this.router.navigate(['/students']);
-        } else {
-          this.router.navigate(['/documents']);
-        }
+        // if (this.globalVariable.personType === 'professor') {
+        //   this.router.navigate(['/students']);
+        // } else {
+        //   this.router.navigate(['/documents']);
+        // }
       } else {
         // User is signed out
         this.router.navigate(['/']);
