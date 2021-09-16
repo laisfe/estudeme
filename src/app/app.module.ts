@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AngularFireModule } from "@angular/fire";
-import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -20,7 +20,7 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { GlobalVariable } from './shared/globals';
 import { environment } from '../environments/environment';
 import { TestComponent } from './pages/test/test.component';
-
+import { ngxLoadingAnimationTypes, NgxLoadingModule } from 'ngx-loading';
 
 @NgModule({
   declarations: [
@@ -41,18 +41,19 @@ import { TestComponent } from './pages/test/test.component';
     AppRoutingModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule, 
+    AngularFireAuthModule,
     AngularFirestoreModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxLoadingModule.forRoot({
+      animationType: ngxLoadingAnimationTypes.circle,
+        backdropBackgroundColour: 'rgba(0,0,0,0.1)',
+        primaryColour: '#32cc3f', 
+        secondaryColour: '#5de26866', 
+    }),
   ],
-  exports:[
-    AngularFirestoreModule
-  ],
-  providers: [
-    GlobalVariable,
-    Document
-  ],
+  exports: [AngularFirestoreModule],
+  providers: [GlobalVariable, Document],
 
   bootstrap: [AppComponent],
 })

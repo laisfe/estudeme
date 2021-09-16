@@ -6,12 +6,15 @@
       <app-header [title]="'Documentos'"></app-header>
       <div class="container student-docs">
         <section class="student-docs__head">
-          <img class="student-docs__head__image" src="../../../assets/svg/person-square.svg" alt="Imagem alunos" />
+          <img
+            class="student-docs__head__image"
+            src="../../../assets/svg/person-square.svg"
+            alt="Imagem alunos"
+          />
           <h4 class="student-docs__head__name">
             {{ studentName }}
           </h4>
         </section>
-
 
         <section class="student-docs__title">
           <h2 class="student-docs__title__main-title">Upload de atividades</h2>
@@ -26,30 +29,54 @@
 
         <section class="student-docs__docs-button">
           <div class="custom-file">
-            <input type="file" class="custom-file-input" id="customFile" (change)="onChange($event)" />
-            <label class="custom-file-label" for="customFile" id="customFileLabel">Selecione um arquivo</label>
+            <input
+              type="file"
+              class="custom-file-input"
+              id="customFile"
+              (change)="onChange($event)"
+            />
+            <label
+              class="custom-file-label"
+              for="customFile"
+              id="customFileLabel"
+              >Selecione um arquivo</label
+            >
           </div>
-          <button (click)="onUpload()" [disabled]="!files">Upload de arquivo</button>
+          <button (click)="onUpload()" [disabled]="!files">
+            Upload de arquivo
+          </button>
         </section>
         <div class="student-docs__scroll-table">
           <table class="table">
             <tbody>
-              <tr class="student-docs__scroll-table__row" *ngFor="let documents of documentsList; let last = last">
+              <tr
+                class="student-docs__scroll-table__row"
+                *ngFor="let documents of documentsList; let last = last"
+              >
                 <td>
-                  <img class="student-docs__scroll-table__row__image" src="../../../assets/svg/file-earmark-excel.svg"
-                    alt="Excel ícone" />
+                  <img
+                    class="student-docs__scroll-table__row__image"
+                    src="../../../assets/svg/file-earmark-excel.svg"
+                    alt="Excel ícone"
+                  />
                 </td>
                 <td>{{ documents.documentName }}</td>
-                <td>{{ documents.date | date:'dd/MM/yyyy' }}</td>
+                <td>{{ documents.date | date: "dd/MM/yyyy" }}</td>
                 <td>
                   <a (click)="onDownloadFile(documents.id, documents.file)">
-                    <img class="student-docs__scroll-table__row__image" src="../../../assets/svg/download.svg"
-                      alt="Download ícone" />
+                    <img
+                      class="student-docs__scroll-table__row__image"
+                      src="../../../assets/svg/download.svg"
+                      alt="Download ícone"
+                    />
                   </a>
                 </td>
                 <td>
-                  <img class="student-docs__scroll-table__row__image" src="../../../assets/svg/trash.svg"
-                    alt="Download ícone" />
+                  <img
+                    class="student-docs__scroll-table__row__image"
+                    src="../../../assets/svg/trash.svg"
+                    alt="Download ícone"
+                  />
                 </td>
               </tr>
             </tbody>
@@ -59,3 +86,7 @@
     </div>
   </div>
 </div>
+
+<ngx-loading
+  [show]="loading"
+></ngx-loading>

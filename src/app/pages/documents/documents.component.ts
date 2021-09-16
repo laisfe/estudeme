@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { ngxLoadingAnimationTypes } from 'ngx-loading';
 import { StudentsList } from 'src/app/shared/models/students-types';
 import { StudentsService } from 'src/app/shared/services/students.service';
 import { environment } from 'src/environments/environment';
@@ -16,6 +17,9 @@ export class DocumentsComponent implements OnInit {
   documentsList: Documents[];
   studentsList: StudentsList[] = [];
   studentName: string;
+  loading: boolean = false;
+  loadingTemplate: TemplateRef<any>;
+  ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
 
   constructor(
     private service: DocumentsService,
@@ -37,11 +41,13 @@ export class DocumentsComponent implements OnInit {
   }
 
   onUpload(): void {
+    this.loading = true;
     if (this.files && this.files.size > 0) {
       this.service
         .upload(this.files, environment.BASE_URL + '/documents')
         .subscribe(() => {
           setTimeout(() => {
+            this.loading = false;
             window.location.reload();
           }, 4000);
         });
@@ -72,6 +78,7 @@ export class DocumentsComponent implements OnInit {
   }
 
   searchStudent(): void {
+    this.loading = true;
     setTimeout(() => {
       this.studentsService.getStudentsList().subscribe(
         async (students: StudentsList[]) => {
@@ -80,11 +87,13 @@ export class DocumentsComponent implements OnInit {
           this.studentsList.forEach((element) => {
             if (element.email === emailUser) {
               this.studentName = element.nome;
+              this.loading = false;
             }
           });
         },
         (error) => {
           console.log('***error', error);
+          this.loading = false;
         }
       );
     }, 1000);
