@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AnswersList, Avaliation } from './models/answers';
-import { AlternativesList, QuestionsList, Test } from './models/questions';
+import { AlternativesList, Test } from './models/questions';
 import { TestService } from './test.service';
 import firebase from 'firebase/app';
 import 'firebase/auth';

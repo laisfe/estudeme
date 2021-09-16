@@ -12,7 +12,6 @@ import { Documents } from './models/documents';
   styleUrls: ['./documents.component.scss'],
 })
 export class DocumentsComponent implements OnInit {
-
   files: Set<File>;
   documentsList: Documents[];
   studentsList: StudentsList[] = [];
@@ -22,7 +21,7 @@ export class DocumentsComponent implements OnInit {
     private service: DocumentsService,
     private studentsService: StudentsService,
     private angularFireAuth: AngularFireAuth
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.returnFiles();
@@ -42,45 +41,50 @@ export class DocumentsComponent implements OnInit {
       this.service
         .upload(this.files, environment.BASE_URL + '/documents')
         .subscribe(() => {
-          window.location.reload()
+          window.location.reload();
         });
     }
   }
 
   returnFiles(): void {
-    this.service.select(environment.BASE_URL + '/documents')
-      .subscribe((documents) => {
+    this.service.select(environment.BASE_URL + '/documents').subscribe(
+      (documents) => {
         this.documentsList = documents['body'];
-      }, (error) => {
-        console.log('error', error)
-      })
+      },
+      (error) => {
+        console.log('error', error);
+      }
+    );
   }
 
   onDownloadFile(id: number, documentName: string): void {
-    this.service.download(environment.BASE_URL + `/documents/${id}`)
-      .subscribe((response: any) => {
-        const documentNameSplitted = documentName.split('/')[2]
+    this.service.download(environment.BASE_URL + `/documents/${id}`).subscribe(
+      (response: any) => {
+        const documentNameSplitted = documentName.split('/')[2];
         this.service.handleFile(response, documentNameSplitted);
-      }, (error) => {
-        console.log('error', error)
-      })
+      },
+      (error) => {
+        console.log('error', error);
+      }
+    );
   }
 
   searchStudent(): void {
-    this.studentsService.getStudentsList().subscribe(
-      async (students: StudentsList[]) => {
-        this.studentsList = students;
-        const emailUser = (await this.angularFireAuth.currentUser).email
-        this.studentsList.forEach(element => {
-          if (element.email === emailUser) {
-            this.studentName = element.nome;
-          }
-        });
-      },
-      (error) => {
-        console.log('***error', error);
-      }
-    );
-
+    setTimeout(() => {
+      this.studentsService.getStudentsList().subscribe(
+        async (students: StudentsList[]) => {
+          this.studentsList = students;
+          const emailUser = (await this.angularFireAuth.currentUser).email;
+          this.studentsList.forEach((element) => {
+            if (element.email === emailUser) {
+              this.studentName = element.nome;
+            }
+          });
+        },
+        (error) => {
+          console.log('***error', error);
+        }
+      );
+    }, 1000);
   }
 }
