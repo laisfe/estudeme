@@ -5,12 +5,18 @@
     <div class="col-md-12">
       <app-header [title]="'Alunos'"></app-header>
       <div class="container">
-        <div class="scroll-table">
+        <div *ngIf="!loading" class="scroll-table">
           <table class="students table">
             <tbody>
               <div *ngFor="let students of studentsList; let last = last">
-                <a [routerLink]="'/documents'" (click)="passStudentName(students.nome)">
-                  <tr class="students__profile-row" [ngClass]="{'last-child': last}">
+                <a
+                  [routerLink]="'/documents'"
+                  (click)="passStudentName(students.nome)"
+                >
+                  <tr
+                    class="students__profile-row"
+                    [ngClass]="{ 'last-child': last }"
+                  >
                     <img
                       class="students__profile-image"
                       src="../../../assets/svg/person-square.svg"
@@ -27,3 +33,5 @@
     </div>
   </div>
 </div>
+
+<ngx-loading [show]="loading"></ngx-loading>

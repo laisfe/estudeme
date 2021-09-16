@@ -10,10 +10,11 @@ import { StudentsService } from '../../shared/services/students.service';
 })
 export class StudentsComponent implements OnInit {
   studentsList: StudentsList[] = [];
+  loading: boolean = false;
 
   constructor(
     private globalVariable: GlobalVariable,
-    private studentsService: StudentsService,
+    private studentsService: StudentsService
   ) {}
 
   ngOnInit(): void {
@@ -25,11 +26,14 @@ export class StudentsComponent implements OnInit {
   }
 
   getStudentsList(): void {
+    this.loading = true;
     this.studentsService.getStudentsList().subscribe(
       (students: StudentsList[]) => {
+        this.loading = false;
         this.studentsList = students;
       },
       (error) => {
+        this.loading = false;
         console.log('***error', error);
       }
     );
