@@ -8,6 +8,7 @@ import { Subject } from './models/subject';
 import { GlobalVariable } from 'src/app/shared/globals';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-signup',
@@ -34,9 +35,12 @@ export class SignupComponent implements OnInit {
     private router: Router,
     private signupService: SignupService,
     public globalVariable: GlobalVariable
-  ) { }
+  ) {}
 
   ngOnInit(): void {
+    if (firebase.apps.length === 0) {
+      firebase.initializeApp(environment.firebase);
+    }
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         // User is signed in
@@ -52,7 +56,7 @@ export class SignupComponent implements OnInit {
         }
       } else {
         // User is signed out
-        this.router.navigate(['/']);
+        this.router.navigate(['/signup']);
       }
     });
 

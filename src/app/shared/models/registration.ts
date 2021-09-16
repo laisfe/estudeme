@@ -6,6 +6,7 @@ export interface StudentRegistration {
   idIns: number;
   idTurma: number;
   email: string;
+  uid: string;
 }
 
 export interface TeacherRegistration {
@@ -14,4 +15,5 @@ export interface TeacherRegistration {
   idInstituicao: number;
   idDisciplina: number;
   email: string;
+  uid: string;
 }

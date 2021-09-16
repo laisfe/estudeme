@@ -13,6 +13,7 @@ export class SidebarComponent {
 
   ngOnInit(): void{
     this.globalVariable.personType;
+    console.log(this.globalVariable.personType)
   }
 
   routeReturn(): string {

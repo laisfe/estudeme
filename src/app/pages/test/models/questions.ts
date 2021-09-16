@@ -1,3 +1,11 @@
+export interface Test {
+  idProva: string;
+  idProfessor: number;
+  questoes: QuestionsList[];
+  idAluno: number;
+  idTurma: number;
+}
+
 export interface QuestionsList {
   idQuestao: string;
   enunciado: string;

@@ -11,11 +11,17 @@
         </p>
         <section class="test__scroll-questions">
           <form
-            *ngFor="let questions of questionsList; let first = first; let i = index"
+            *ngFor="
+              let questions of questionsList;
+              let first = first;
+              let i = index
+            "
             class="test__questions"
             [ngClass]="{ 'first-child': first }"
           >
-            <p class="test__question-title">{{ i+1 }} ) {{ questions.enunciado }}</p>
+            <p class="test__question-title">
+              {{ i + 1 }} ) {{ questions.enunciado }}
+            </p>
             <div
               class="form-check"
               *ngFor="let alternativas of questions.alternativas | keyvalue"
@@ -26,21 +32,31 @@
                 id="questions.idQuestao"
                 name="provinha"
                 value="alternativas.value"
-                (change)="onItemChange(alternativas.value, questions.respostaCorreta)"
+                (change)="
+                  onItemChange(alternativas, questions)
+                "
               />
-              <label 
-              class="form-check-label ml-1">
+              <label class="form-check-label ml-1">
                 {{ alternativas.value }}
               </label>
             </div>
             <button
               class="test__send-button btn btn-primary"
               type="submit"
-              (click)="verifyAnswer()"
+              (click)="
+                verifyAnswer(questions.idQuestao, questions.respostaCorreta)
+              "
             >
               Responder questão
             </button>
           </form>
+          <button
+            class="test__send-button btn btn-primary"
+            type="submit"
+            (click)="sendAnswer()"
+          >
+            Enviar respostas
+          </button>
         </section>
       </div>
     </div>

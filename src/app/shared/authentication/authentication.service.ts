@@ -65,13 +65,14 @@ export class AuthenticationService {
             idIns: idInstituicao,
             idTurma: idTurma,
             email: email,
+            uid: res.user.uid,
           };
-          this.signupService.putNewStudent(this.studentRegistration)
-            .subscribe(() => {
-            }, (error) => {
+          this.signupService.putNewStudent(this.studentRegistration).subscribe(
+            () => {},
+            (error) => {
               console.log('error', error);
             }
-            );
+          );
           this.router.navigate(['/documents']);
         } else {
           this.teacherRegistration = {
@@ -79,9 +80,10 @@ export class AuthenticationService {
             idInstituicao: idInstituicao,
             idDisciplina: idDisciplina,
             email: email,
+            uid: res.user.uid,
           };
           this.signupService.putNewTeacher(this.teacherRegistration).subscribe(
-            () => { },
+            () => {},
             (error) => {
               console.log('error', error);
             }
@@ -102,7 +104,7 @@ export class AuthenticationService {
         var starCountRef = firebase.database().ref('users/' + res.user.uid);
         starCountRef.on('value', (snapshot) => {
           const data = snapshot.val();
-          console.log('data', data)
+          console.log('data', data);
           if (data.personType === 'aluno') {
             this.router.navigate(['/documents']);
           } else {

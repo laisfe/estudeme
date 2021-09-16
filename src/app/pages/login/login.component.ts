@@ -5,7 +5,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import { Router } from '@angular/router';
 import { GlobalVariable } from 'src/app/shared/globals';
-
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +25,9 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if (firebase.apps.length === 0) {
+      firebase.initializeApp(environment.firebase);
+    }
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         // User is signed in

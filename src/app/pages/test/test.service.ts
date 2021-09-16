@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { QuestionsList } from './models/questions';
+import { QuestionsList, Test } from './models/questions';
+import { Avaliation } from './models/answers';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,14 @@ import { QuestionsList } from './models/questions';
 export class TestService {
   constructor(private http: HttpClient) {}
 
-  getQuestionsList(): Observable<QuestionsList[]> {
-    return this.http.get<QuestionsList[]>(`${environment.SERVER_URL}/questao`);
+  getTest(id: string): Observable<Test> {
+    return this.http.get<Test>(`${environment.SERVER_URL}/prova/${id}`);
+  }
+
+  postTest(data: Avaliation): Observable<Avaliation> {
+    return this.http.post<Avaliation>(
+      `${environment.SERVER_URL}/avaliacao`,
+      data
+    );
   }
 }

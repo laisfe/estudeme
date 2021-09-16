@@ -5,5 +5,6 @@ export interface StudentsList {
   nascimento: Date;
   idIns: number;
   idTurma: number;
-  email: string
+  email: string;
+  uid: string;
 }
