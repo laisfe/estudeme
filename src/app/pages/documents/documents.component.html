@@ -40,7 +40,7 @@
                     alt="Excel ícone" />
                 </td>
                 <td>{{ documents.documentName }}</td>
-                <td>{{ documents.date | date:'shortDate' }}</td>
+                <td>{{ documents.date | date:'dd/MM/yyyy' }}</td>
                 <td>
                   <a (click)="onDownloadFile(documents.id, documents.file)">
                     <img class="student-docs__scroll-table__row__image" src="../../../assets/svg/download.svg"

@@ -41,7 +41,9 @@ export class DocumentsComponent implements OnInit {
       this.service
         .upload(this.files, environment.BASE_URL + '/documents')
         .subscribe(() => {
-          window.location.reload();
+          setTimeout(() => {
+            window.location.reload();
+          }, 4000);
         });
     }
   }
