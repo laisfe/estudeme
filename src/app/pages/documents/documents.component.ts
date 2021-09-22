@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { ngxLoadingAnimationTypes } from 'ngx-loading';
+import { Router } from '@angular/router';
+import { GlobalVariable } from 'src/app/shared/globals';
 import { StudentsList } from 'src/app/shared/models/students-types';
 import { StudentsService } from 'src/app/shared/services/students.service';
 import { environment } from 'src/environments/environment';
@@ -18,16 +19,17 @@ export class DocumentsComponent implements OnInit {
   studentsList: StudentsList[] = [];
   studentName: string;
   loading: boolean = false;
-  loadingTemplate: TemplateRef<any>;
-  ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
 
   constructor(
     private service: DocumentsService,
     private studentsService: StudentsService,
-    private angularFireAuth: AngularFireAuth
+    private angularFireAuth: AngularFireAuth,
+    public globalVariable: GlobalVariable,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.globalVariable.personType;
     this.returnFiles();
     this.searchStudent();
   }
@@ -87,8 +89,8 @@ export class DocumentsComponent implements OnInit {
           this.studentsList.forEach((element) => {
             if (element.email === emailUser) {
               this.studentName = element.nome;
-              this.loading = false;
             }
+            this.loading = false;
           });
         },
         (error) => {
@@ -97,5 +99,9 @@ export class DocumentsComponent implements OnInit {
         }
       );
     }, 1000);
+  }
+
+  createActivity(): void {
+    this.router.navigate(['/newActivity'])
   }
 }

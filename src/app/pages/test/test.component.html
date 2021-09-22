@@ -5,60 +5,64 @@
     <div class="col-md-12">
       <app-header [title]="'Prova'"></app-header>
       <div class="container">
-        <p class="test__main-message">
-          Responda as questões abaixo para podermos analisar suas possíveis
-          dificuldades
-        </p>
-        <section class="test__scroll-questions">
-          <form
-            *ngFor="
-              let questions of questionsList;
-              let first = first;
-              let i = index
-            "
-            class="test__questions"
-            [ngClass]="{ 'first-child': first }"
-          >
-            <p class="test__question-title">
-              {{ i + 1 }} ) {{ questions.enunciado }}
-            </p>
-            <div
-              class="form-check"
-              *ngFor="let alternativas of questions.alternativas | keyvalue"
+        <div *ngIf="!loading" class="test">
+          <p class="test__main-message">
+            Responda as questões abaixo para podermos analisar suas possíveis
+            dificuldades
+          </p>
+          <section>
+            <form
+              *ngFor="
+                let questions of questionsList;
+                let first = first;
+                let i = index
+              "
+              class="test__questions"
+              [ngClass]="{ 'first-child': first }"
             >
-              <input
-                #questao
-                type="radio"
-                id="questions.idQuestao"
-                name="provinha"
-                value="alternativas.value"
-                (change)="
-                  onItemChange(alternativas, questions)
-                "
-              />
-              <label class="form-check-label ml-1">
-                {{ alternativas.value }}
-              </label>
-            </div>
+              <div *ngIf="nextQuestion === i">
+                <p class="test__question-title">
+                  {{ i + 1 }} ) {{ questions.enunciado }}
+                </p>
+                <div
+                  class="form-check"
+                  *ngFor="let alternativas of questions.alternativas | keyvalue"
+                >
+                  <input
+                    #questao
+                    type="radio"
+                    id="questions.idQuestao"
+                    name="provinha"
+                    value="alternativas.value"
+                    (change)="onItemChange(alternativas, questions)"
+                  />
+                  <label class="form-check-label ml-1">
+                    {{ alternativas.value }}
+                  </label>
+                </div>
+                <button
+                  class="test__send-button btn btn-primary"
+                  type="submit"
+                  (click)="
+                    verifyAnswer(questions.idQuestao, questions.respostaCorreta)
+                  "
+                >
+                  Responder questão
+                </button>
+              </div>
+            </form>
             <button
               class="test__send-button btn btn-primary"
               type="submit"
-              (click)="
-                verifyAnswer(questions.idQuestao, questions.respostaCorreta)
-              "
+              (click)="sendAnswer()"
             >
-              Responder questão
+              Enviar respostas
             </button>
-          </form>
-          <button
-            class="test__send-button btn btn-primary"
-            type="submit"
-            (click)="sendAnswer()"
-          >
-            Enviar respostas
-          </button>
-        </section>
+          </section>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<ngx-loading [show]="loading"></ngx-loading>

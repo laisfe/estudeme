@@ -2,6 +2,7 @@ export interface AnswersList {
   idQuestao: string;
   repostaCorreta: string;
   respostaRecebida: string;
+  tempoDecorrido: string;
 }
 
 export interface Avaliation {

@@ -20,6 +20,11 @@ export class TestComponent implements OnInit {
   correctAnswer: boolean;
   answerList: AnswersList[] = [];
   idTest: string;
+  loading: boolean = false;
+  nextQuestion: number;
+  time: number = 0;
+  interval;
+  play: boolean;
 
   constructor(
     private testService: TestService,
@@ -28,16 +33,28 @@ export class TestComponent implements OnInit {
 
   ngOnInit(): void {
     this.getQuestionsList();
+    this.nextQuestion = 0;
+  }
+
+  startTimer(): void {
+    this.play = true;
+    this.interval = setInterval(() => {
+      this.time++;
+    }, 1000);
   }
 
   getQuestionsList(): void {
+    this.loading = true;
     this.testService.getTest('6141ffe2631c5ecb56737721').subscribe(
       (questions: Test) => {
         this.idTest = questions.idProva;
         this.questionsList = questions.questoes;
+        this.loading = false;
+        this.startTimer();
       },
       (error) => {
         console.log('***error', error);
+        this.loading = false;
       }
     );
   }
@@ -48,6 +65,7 @@ export class TestComponent implements OnInit {
   }
 
   verifyAnswer(idQuestao, respostaCorreta): void {
+    this.pauseTimer();
     if (this.answerList.length > 0) {
       for (let i = 0; i < this.answerList.length; i++) {
         const item = this.answerList[i];
@@ -56,6 +74,7 @@ export class TestComponent implements OnInit {
             idQuestao: idQuestao,
             repostaCorreta: respostaCorreta,
             respostaRecebida: this.selectedAnswer,
+            tempoDecorrido: this.time.toString()
           });
         } else {
           const found = this.answerList.find(
@@ -66,6 +85,7 @@ export class TestComponent implements OnInit {
               idQuestao: idQuestao,
               repostaCorreta: respostaCorreta,
               respostaRecebida: this.selectedAnswer,
+              tempoDecorrido: this.time.toString()
             });
           }
         }
@@ -75,8 +95,17 @@ export class TestComponent implements OnInit {
         idQuestao: idQuestao,
         repostaCorreta: respostaCorreta,
         respostaRecebida: this.selectedAnswer,
+        tempoDecorrido: this.time.toString()
       });
     }
+    this.time = 0;
+    this.nextQuestion++;
+    this.startTimer();
+  }
+
+  pauseTimer(): void {
+    this.play = false;
+    clearInterval(this.interval);
   }
 
   sendAnswer(): void {

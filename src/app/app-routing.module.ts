@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DocumentsComponent } from './pages/documents/documents.component';
 import { LoginComponent } from './pages/login/login.component';
+import { NewActivityComponent } from './pages/new-activity/new-activity.component';
 import { ReportComponent } from './pages/report/report.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { SignupComponent } from './pages/signup/signup.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'reports', component: ReportComponent },
   { path: 'settings', component: SettingsComponent },
   { path: 'test', component: TestComponent },
+  { path: 'newActivity', component: NewActivityComponent },
 ];
 
 @NgModule({

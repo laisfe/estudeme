@@ -1,6 +1,9 @@
 @import "../../shared/scss/main-content.scss";
 
 .test {
+  height: calc(100% - 35px);
+  overflow-y: auto;
+
   &__main-message {
     color: $gray-texts;
     font-weight: bold;
@@ -8,13 +11,8 @@
     padding-bottom: 15px;
   }
 
-  &__scroll-questions {
-    height: calc(100% - 35px);
-    overflow-y: auto;
-
-    & .first-child {
-      padding-top: unset;
-    }
+  & .first-child {
+    padding-top: unset;
   }
 
   &__questions {

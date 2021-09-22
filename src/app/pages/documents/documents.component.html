@@ -48,6 +48,9 @@
             <button (click)="onUpload()" [disabled]="!files">
               Upload de arquivo
             </button>
+            <button *ngIf="globalVariable?.personType === 'professor'" (click)="createActivity()">
+              Criar atividade
+            </button>
           </section>
           <div class="student-docs__scroll-table">
             <table class="table">

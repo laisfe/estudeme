@@ -21,6 +21,7 @@ import { GlobalVariable } from './shared/globals';
 import { environment } from '../environments/environment';
 import { TestComponent } from './pages/test/test.component';
 import { ngxLoadingAnimationTypes, NgxLoadingModule } from 'ngx-loading';
+import { NewActivityComponent } from './pages/new-activity/new-activity.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ngxLoadingAnimationTypes, NgxLoadingModule } from 'ngx-loading';
     SideImageComponent,
     HeaderComponent,
     TestComponent,
+    NewActivityComponent,
   ],
   imports: [
     BrowserModule,
