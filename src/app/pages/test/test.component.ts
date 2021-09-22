@@ -72,7 +72,7 @@ export class TestComponent implements OnInit {
         if (item.idQuestao === idQuestao) {
           this.answerList.splice(i, 1, {
             idQuestao: idQuestao,
-            repostaCorreta: respostaCorreta,
+            respostaCorreta: respostaCorreta,
             respostaRecebida: this.selectedAnswer,
             tempoDecorrido: this.time.toString()
           });
@@ -83,7 +83,7 @@ export class TestComponent implements OnInit {
           if (!found) {
             this.answerList.push({
               idQuestao: idQuestao,
-              repostaCorreta: respostaCorreta,
+              respostaCorreta: respostaCorreta,
               respostaRecebida: this.selectedAnswer,
               tempoDecorrido: this.time.toString()
             });
@@ -93,7 +93,7 @@ export class TestComponent implements OnInit {
     } else {
       this.answerList.push({
         idQuestao: idQuestao,
-        repostaCorreta: respostaCorreta,
+        respostaCorreta: respostaCorreta,
         respostaRecebida: this.selectedAnswer,
         tempoDecorrido: this.time.toString()
       });

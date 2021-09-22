@@ -1,6 +1,6 @@
 export interface AnswersList {
   idQuestao: string;
-  repostaCorreta: string;
+  respostaCorreta: string;
   respostaRecebida: string;
   tempoDecorrido: string;
 }
