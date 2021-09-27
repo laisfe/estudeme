@@ -1,1 +1,65 @@
-<p>new-activity works!</p>
+<app-sidebar [route]="'/documents'"></app-sidebar>
+
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <app-header [title]="'Nova atividade'"></app-header>
+      <div class="container">
+        <div *ngIf="!loading" class="activity">
+          <!-- <form id="wrapper"> -->
+          <div
+            class="form-check activity__questions-blocks"
+            *ngFor="let questions of questionsList"
+          >
+            <input type="checkbox" id="flexCheckDefault" (change)="checkCheckBoxvalue(questions)" />
+            <section class="activity__blocks">
+              <!-- <label class="form-check-label" for="flexCheckDefault"> -->
+              <label class="form-check-label" for="flexCheckDefault">
+                <span class="activity__bold-font">Enunciado:</span>
+                {{ questions.enunciado }}
+              </label>
+              <br />
+              <label class="form-check-label">
+                <span class="activity__bold-font">Alternativas:</span>
+              </label>
+              <ul>
+                <li>
+                  <span class="activity__bold-font">A:</span>
+                  {{ questions.alternativas.A }}
+                </li>
+                <li>
+                  <span class="activity__bold-font">B:</span>
+                  {{ questions.alternativas.B }}
+                </li>
+                <li>
+                  <span class="activity__bold-font">C:</span>
+                  {{ questions.alternativas.C }}
+                </li>
+                <li>
+                  <span class="activity__bold-font">D:</span>
+                  {{ questions.alternativas.D }}
+                </li>
+                <li>
+                  <span class="activity__bold-font">E:</span>
+                  {{ questions.alternativas.E }}
+                </li>
+              </ul>
+              <label class="form-check-label">
+                <span class="activity__bold-font">Resposta correta:</span>
+                {{ questions.respostaCorreta }}
+              </label>
+            </section>
+
+            <!-- </label> -->
+          </div>
+          <button (click)="sendQuestions()">
+            enviar questoes
+          </button>
+          <!-- </form> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ngx-loading [show]="loading"></ngx-loading>
