@@ -6,6 +6,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import { StudentsService } from 'src/app/shared/services/students.service';
 import { StudentsList } from 'src/app/shared/models/students-types';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-test',
@@ -25,14 +26,26 @@ export class TestComponent implements OnInit {
   time: number = 0;
   interval;
   play: boolean;
+  didInitialTest: boolean;
+  uid: string;
 
   constructor(
     private testService: TestService,
-    private studentsService: StudentsService
+    private studentsService: StudentsService,
+    private angularFireAuth: AngularFireAuth
   ) {}
 
   ngOnInit(): void {
-    this.getQuestionsList();
+    this.loading = true;
+    this.angularFireAuth.authState.subscribe(
+      (user) => {
+        this.uid = user.uid;
+        this.getQuestionsList();
+      },
+      (error) => {
+        console.log('error', error);
+      }
+    );
     this.nextQuestion = 0;
   }
 
@@ -45,15 +58,47 @@ export class TestComponent implements OnInit {
 
   getQuestionsList(): void {
     this.loading = true;
-    this.testService.getTest('6141ffe2631c5ecb56737721').subscribe(
-      (questions: Test) => {
-        this.idTest = questions.idProva;
-        this.questionsList = questions.questoes;
-        this.loading = false;
-        this.startTimer();
+    this.studentsService.getStudentsList().subscribe(
+      (students: StudentsList[]) => {
+        students.every((element) => {
+          if (element.uid === this.uid) {
+            this.didInitialTest = element.fezProvaInicial;
+            return false;
+          }
+          return true;
+        });
+        if (!this.didInitialTest) {
+          const idInitialTest = '6141ffe2631c5ecb56737721';
+          this.testService.getTestById(idInitialTest).subscribe(
+            (questions: Test) => {
+              this.idTest = questions.idProva;
+              this.questionsList = questions.questoes;
+              this.loading = false;
+              this.startTimer();
+            },
+            (error) => {
+              console.log('***error', error);
+              this.loading = false;
+            }
+          );
+        } else {
+          this.testService.getTests().subscribe(
+            (tests: Test[]) => {
+              const id = tests.length - 1
+              this.questionsList = tests[id].questoes;
+              this.idTest = tests[id].idProva;
+              this.loading = false;
+              this.startTimer();
+            },
+            (error) => {
+              console.log('error', error);
+              this.loading = false;
+            }
+          );
+        }
       },
       (error) => {
-        console.log('***error', error);
+        console.log('error', error);
         this.loading = false;
       }
     );
@@ -74,7 +119,7 @@ export class TestComponent implements OnInit {
             idQuestao: idQuestao,
             respostaCorreta: respostaCorreta,
             respostaRecebida: this.selectedAnswer,
-            tempoDecorrido: this.time.toString()
+            tempoDecorrido: this.time.toString(),
           });
         } else {
           const found = this.answerList.find(
@@ -85,7 +130,7 @@ export class TestComponent implements OnInit {
               idQuestao: idQuestao,
               respostaCorreta: respostaCorreta,
               respostaRecebida: this.selectedAnswer,
-              tempoDecorrido: this.time.toString()
+              tempoDecorrido: this.time.toString(),
             });
           }
         }
@@ -95,7 +140,7 @@ export class TestComponent implements OnInit {
         idQuestao: idQuestao,
         respostaCorreta: respostaCorreta,
         respostaRecebida: this.selectedAnswer,
-        tempoDecorrido: this.time.toString()
+        tempoDecorrido: this.time.toString(),
       });
     }
     this.time = 0;
@@ -118,15 +163,16 @@ export class TestComponent implements OnInit {
       }
     });
 
-    this.studentsService
-      .getStudentsList()
-      .subscribe((students: StudentsList[]) => {
-        students.forEach((element) => {
+    this.studentsService.getStudentsList().subscribe(
+      (students: StudentsList[]) => {
+        students.every((element) => {
           if (element.uid === uid) {
             studentData = element;
+            return false;
           }
+          return true;
         });
-        const data: Avaliation = {
+        const dataAvaliation: Avaliation = {
           respostas: this.answerList,
           data: new Date(),
           qtdQuestoes: this.answerList.length,
@@ -137,12 +183,41 @@ export class TestComponent implements OnInit {
           idProfessor: 0,
         };
 
-        this.testService.postTest(data).subscribe(
+        this.testService.postTest(dataAvaliation).subscribe(
           () => {},
           (error) => {
             console.log('error', error);
           }
         );
-      });
+
+        if (!this.didInitialTest) {
+          const dataStudents: StudentsList = {
+            idAluno: studentData.idAluno,
+            nome: studentData.nome,
+            ano: studentData.ano,
+            nascimento: studentData.nascimento,
+            idIns: studentData.idIns,
+            idTurma: studentData.idTurma,
+            email: studentData.email,
+            uid: studentData.uid,
+            fezProvaInicial: true,
+          };
+
+          this.studentsService.putStudentsList(dataStudents, dataStudents.idAluno).subscribe(
+            () => {
+              window.location.reload();
+            },
+            (error) => {
+              console.log('error', error);
+            }
+          );
+        } else {
+          window.location.reload();
+        }
+      },
+      (error) => {
+        console.log('error', error);
+      }
+    );
   }
 }

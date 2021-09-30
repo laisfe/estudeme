@@ -11,8 +11,12 @@ import { Avaliation } from './models/answers';
 export class TestService {
   constructor(private http: HttpClient) {}
 
-  getTest(id: string): Observable<Test> {
+  getTestById(id: string): Observable<Test> {
     return this.http.get<Test>(`${environment.SERVER_URL}/prova/${id}`);
+  }
+
+  getTests(): Observable<Test[]> {
+    return this.http.get<Test[]>(`${environment.SERVER_URL}/prova`);
   }
 
   postTest(data: Avaliation): Observable<Avaliation> {

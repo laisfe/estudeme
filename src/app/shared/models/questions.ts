@@ -1,5 +1,5 @@
 export interface Test {
-  idProva: string;
+  idProva?: string;
   idProfessor: number;
   questoes: QuestionsList[];
   idAluno: number;

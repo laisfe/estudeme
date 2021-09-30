@@ -13,4 +13,11 @@ export class StudentsService {
   getStudentsList(): Observable<StudentsList[]> {
     return this.http.get<StudentsList[]>(`${environment.SERVER_URL}/aluno`);
   }
+
+  putStudentsList(data: StudentsList, id: number): Observable<StudentsList> {
+    return this.http.put<StudentsList>(
+      `${environment.SERVER_URL}/aluno/${id}`,
+      data
+    );
+  }
 }

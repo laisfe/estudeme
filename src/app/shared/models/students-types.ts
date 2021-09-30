@@ -7,4 +7,5 @@ export interface StudentsList {
   idTurma: number;
   email: string;
   uid: string;
+  fezProvaInicial: boolean
 }

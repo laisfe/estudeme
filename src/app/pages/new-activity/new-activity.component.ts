@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { QuestionsList } from 'src/app/shared/models/questions';
+import { QuestionsList, Test } from 'src/app/shared/models/questions';
+import { StudentsList } from 'src/app/shared/models/students-types';
 import { TeachersList } from 'src/app/shared/models/teachers';
+import { StudentsService } from 'src/app/shared/services/students.service';
 import { TeacherService } from 'src/app/shared/services/teacher.service';
 import { NewActivityService } from './new-activity.service';
+import { of } from 'rxjs';
+import { catchError, finalize } from 'rxjs/operators';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 @Component({
   selector: 'app-new-activity',
@@ -16,44 +22,51 @@ export class NewActivityComponent implements OnInit {
   public formDataList = [];
   questionsList: QuestionsList[];
   savedQuestionsList: QuestionsList[] = [];
+  savedStudentsList: { idAluno: number; idTurma: number }[] = [];
+  studentsList: StudentsList[] = [];
+  uidUser: string;
 
   constructor(
     public newActivityService: NewActivityService,
     public teacherService: TeacherService,
-    private angularFireAuth: AngularFireAuth
+    private angularFireAuth: AngularFireAuth,
+    private studentsService: StudentsService
   ) {}
 
   ngOnInit(): void {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.uidUser = user.uid;
+      }
+    });
+
     this.getQuestions();
+    this.getStudents();
   }
 
   getQuestions(): void {
+    this.loading = true;
     this.newActivityService.getQuestionsList().subscribe(
       (questions: QuestionsList[]) => {
         this.questionsList = questions;
+        this.loading = false;
       },
       (error) => {
         console.log('error', error);
+        this.loading = false;
       }
     );
   }
 
-  async sendQuestions(): Promise<void> {
-    console.log('this.savedQuestionsList', this.savedQuestionsList);
-    const uidUser = (await this.angularFireAuth.currentUser).uid;
-    this.teacherService.getTeachersList().subscribe(
-      (teachers: TeachersList[]) => {
-        teachers.forEach((element) => {
-          if (element.uid === uidUser) {
-            const idProfessor = element.idProfessor;
-          }
-        });
+  getStudents(): void {
+    this.studentsService.getStudentsList().subscribe(
+      (students: StudentsList[]) => {
+        this.studentsList = students;
       },
       (error) => {
         console.log('error', error);
       }
     );
-    console.log(uidUser);
   }
 
   checkCheckBoxvalue(questions): void {
@@ -103,17 +116,74 @@ export class NewActivityComponent implements OnInit {
     }
   }
 
-  // addMore(): void {
-  //   var contents = jQuery('form').html();
-  //   jQuery('#wrapper').append(contents);
-  // }
-
-  addItem($item) {
-    this.formDataList.push($item);
-    this.data = {};
+  checkCheckBoxStudentsValue(students: StudentsList): void {
+    if (this.savedStudentsList.length > 0) {
+      for (let i = 0; i < this.savedStudentsList.length; i++) {
+        const item = this.savedStudentsList[i];
+        if (item.idAluno === students.idAluno) {
+          this.savedStudentsList.splice(i, 1);
+          break;
+        } else {
+          const found = this.savedStudentsList.find(
+            (el) => el.idAluno === students.idAluno
+          );
+          if (!found) {
+            this.savedStudentsList.push({
+              idAluno: students.idAluno,
+              idTurma: students.idTurma,
+            });
+            break;
+          } else if (item.idAluno === students.idAluno) {
+            this.savedQuestionsList.splice(i, 1);
+            break;
+          }
+        }
+      }
+    } else {
+      this.savedStudentsList.push({
+        idAluno: students.idAluno,
+        idTurma: students.idTurma,
+      });
+    }
   }
 
-  removeItem($item) {
-    this.formDataList.splice(this.formDataList.indexOf($item), 1);
+  sendQuestions(): void {
+    var idProfessor;
+    var dataTest: Test;
+
+    this.teacherService
+      .getTeachersList()
+      .pipe(
+        finalize(() => {
+          this.savedStudentsList.forEach((element) => {
+            dataTest = {
+              idProfessor: idProfessor,
+              questoes: this.savedQuestionsList,
+              idAluno: element.idAluno,
+              idTurma: element.idTurma,
+            };
+            this.newActivityService.postTest(dataTest).subscribe(
+              () => {},
+              (error) => {
+                console.log('error', error);
+              }
+            );
+          });
+        })
+      )
+      .subscribe(
+        (teachers: TeachersList[]) => {
+          teachers.every((element) => {
+            if (element.uid === this.uidUser) {
+              idProfessor = element.idProfessor;
+              return false;
+            }
+            return true;
+          });
+        },
+        (error) => {
+          console.log('error', error);
+        }
+      );
   }
 }

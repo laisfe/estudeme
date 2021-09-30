@@ -6,19 +6,23 @@
       <app-header [title]="'Nova atividade'"></app-header>
       <div class="container">
         <div *ngIf="!loading" class="activity">
-          <!-- <form id="wrapper"> -->
+          <span class="activity__subtitle"
+            >Selecione as questões que você deseja estarem presentes na prova:</span
+          >
           <div
             class="form-check activity__questions-blocks"
             *ngFor="let questions of questionsList"
           >
-            <input type="checkbox" id="flexCheckDefault" (change)="checkCheckBoxvalue(questions)" />
+            <input
+              type="checkbox"
+              id="flexCheckDefault"
+              (change)="checkCheckBoxvalue(questions)"
+            />
             <section class="activity__blocks">
-              <!-- <label class="form-check-label" for="flexCheckDefault"> -->
               <label class="form-check-label" for="flexCheckDefault">
                 <span class="activity__bold-font">Enunciado:</span>
                 {{ questions.enunciado }}
               </label>
-              <br />
               <label class="form-check-label">
                 <span class="activity__bold-font">Alternativas:</span>
               </label>
@@ -49,13 +53,30 @@
                 {{ questions.respostaCorreta }}
               </label>
             </section>
-
-            <!-- </label> -->
           </div>
-          <button (click)="sendQuestions()">
-            enviar questoes
+          <span class="activity__subtitle"
+            >Selecione os alunos que irão realizar esta prova:</span
+          >
+          <div *ngFor="let students of studentsList">
+            <input
+              type="checkbox"
+              id="flexCheckDefault"
+              (change)="checkCheckBoxStudentsValue(students)"
+            />
+            <section class="activity__blocks">
+              <label class="form-check-label" for="flexCheckDefault">
+                <span class="activity__bold-font">Nome:</span>
+                {{ students.nome }}
+              </label>
+              <label class="form-check-label" for="flexCheckDefault">
+                <span class="activity__bold-font">Ano:</span>
+                {{ students.ano }}
+              </label>
+            </section>
+          </div>
+          <button class="activity__send-button" (click)="sendQuestions()">
+            Enviar questões
           </button>
-          <!-- </form> -->
         </div>
       </div>
     </div>
