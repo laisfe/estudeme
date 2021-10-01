@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { finalize } from 'rxjs/operators';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import { AnswersList, Avaliation } from './models/answers';
 import { AlternativesList, Test } from '../../shared/models/questions';
 import { TestService } from './test.service';
-import firebase from 'firebase/app';
-import 'firebase/auth';
 import { StudentsService } from 'src/app/shared/services/students.service';
 import { StudentsList } from 'src/app/shared/models/students-types';
-import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-test',
@@ -28,24 +28,21 @@ export class TestComponent implements OnInit {
   play: boolean;
   didInitialTest: boolean;
   uid: string;
+  idStudent: number;
 
   constructor(
     private testService: TestService,
-    private studentsService: StudentsService,
-    private angularFireAuth: AngularFireAuth
+    private studentsService: StudentsService
   ) {}
 
   ngOnInit(): void {
     this.loading = true;
-    this.angularFireAuth.authState.subscribe(
-      (user) => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
         this.uid = user.uid;
         this.getQuestionsList();
-      },
-      (error) => {
-        console.log('error', error);
       }
-    );
+    });
     this.nextQuestion = 0;
   }
 
@@ -58,17 +55,19 @@ export class TestComponent implements OnInit {
 
   getQuestionsList(): void {
     this.loading = true;
+    const idInitialTest = '61564aea630c7fbfc7c96814';
     this.studentsService.getStudentsList().subscribe(
       (students: StudentsList[]) => {
         students.every((element) => {
           if (element.uid === this.uid) {
             this.didInitialTest = element.fezProvaInicial;
+            this.idStudent = element.idAluno;
+            console.log('this.idStudent primeiro if', this.idStudent);
             return false;
           }
           return true;
         });
         if (!this.didInitialTest) {
-          const idInitialTest = '6141ffe2631c5ecb56737721';
           this.testService.getTestById(idInitialTest).subscribe(
             (questions: Test) => {
               this.idTest = questions.idProva;
@@ -84,11 +83,18 @@ export class TestComponent implements OnInit {
         } else {
           this.testService.getTests().subscribe(
             (tests: Test[]) => {
-              const id = tests.length - 1
-              this.questionsList = tests[id].questoes;
-              this.idTest = tests[id].idProva;
-              this.loading = false;
-              this.startTimer();
+              for (let i = tests.length; i > 0; i--) {
+                if (tests[i - 1].idProva !== idInitialTest) {
+                  if (tests[i - 1].idAluno === this.idStudent) {
+                    this.questionsList = tests[i - 1].questoes;
+                    this.idTest = tests[i - 1].idProva;
+                    this.loading = false;
+                    this.startTimer();
+                  }
+                } else {
+                  this.loading = false;
+                }
+              }
             },
             (error) => {
               console.log('error', error);
@@ -203,16 +209,14 @@ export class TestComponent implements OnInit {
             fezProvaInicial: true,
           };
 
-          this.studentsService.putStudentsList(dataStudents, dataStudents.idAluno).subscribe(
-            () => {
-              window.location.reload();
-            },
-            (error) => {
-              console.log('error', error);
-            }
-          );
-        } else {
-          window.location.reload();
+          this.studentsService
+            .putStudentsList(dataStudents, dataStudents.idAluno)
+            .subscribe(
+              () => {},
+              (error) => {
+                console.log('error', error);
+              }
+            );
         }
       },
       (error) => {

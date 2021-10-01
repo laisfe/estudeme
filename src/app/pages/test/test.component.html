@@ -4,7 +4,10 @@
       <app-header [title]="'Prova'"></app-header>
       <div class="container">
         <div *ngIf="!loading" class="test">
-          <p class="test__main-message">
+          <p *ngIf="questionsList.length === 0" class="test__main-message">
+            No momento não há nenhuma prova disponível para você.
+          </p>
+          <p *ngIf="questionsList.length !== 0" class="test__main-message">
             Responda as questões abaixo para podermos analisar suas possíveis
             dificuldades
           </p>
@@ -50,6 +53,7 @@
               </div>
             </form>
             <button
+              *ngIf="questionsList.length !== 0"
               class="test__send-button btn btn-primary"
               type="submit"
               (click)="sendAnswer()"
