@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/shared/authentication/authentication.service';
 import { Observable } from 'rxjs';
 import firebase from 'firebase/app';
@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
   constructor(
     public authenticationService: AuthenticationService,
     private router: Router,
-    public globalVariable: GlobalVariable
-  ) { }
+    public globalVariable: GlobalVariable,
+  ) {}
 
   ngOnInit(): void {
     if (firebase.apps.length === 0) {

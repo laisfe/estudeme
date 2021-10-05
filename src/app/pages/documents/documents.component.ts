@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { GlobalVariable } from 'src/app/shared/globals';
@@ -25,7 +25,7 @@ export class DocumentsComponent implements OnInit {
     private studentsService: StudentsService,
     private angularFireAuth: AngularFireAuth,
     public globalVariable: GlobalVariable,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -102,6 +102,6 @@ export class DocumentsComponent implements OnInit {
   }
 
   createActivity(): void {
-    this.router.navigate(['/newActivity'])
+    this.router.navigate(['/newActivity']);
   }
 }

@@ -12,6 +12,8 @@ import { GlobalVariable } from './shared/globals';
 })
 export class AppComponent {
   title = 'estudeme';
+  hideSidebar: boolean = false;
+  route: string;
 
   constructor(public globalVariable: GlobalVariable, private router: Router) {}
 

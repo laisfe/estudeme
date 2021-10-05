@@ -38,6 +38,7 @@ export class SignupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.globalVariable.hideSidebar = true;
     if (firebase.apps.length === 0) {
       firebase.initializeApp(environment.firebase);
     }

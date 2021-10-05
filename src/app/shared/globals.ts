@@ -4,4 +4,5 @@ import { Injectable } from "@angular/core";
 export class GlobalVariable {
   public studentNameGlobal: string = '';
   public personType: string = '';
+  public hideSidebar: boolean = false;
 }
