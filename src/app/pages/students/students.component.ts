@@ -18,7 +18,7 @@ export class StudentsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    window.location.reload();
+    this.globalVariable.hideSidebar = false;
     this.getStudentsList();
   }
 
