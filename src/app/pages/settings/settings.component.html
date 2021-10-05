@@ -31,6 +31,7 @@
               class="data-change__button btn btn-primary"
               type="submit"
               (click)="verifyEmail()"
+              [disabled]="!inputEmail || !inputPassword"
             >
               Solicitar verificação
             </button>

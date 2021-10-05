@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs/operators';
 import { GlobalVariable } from 'src/app/shared/globals';
 import { StudentsList } from 'src/app/shared/models/students-types';
@@ -31,13 +32,15 @@ export class SettingsComponent implements OnInit {
   constructor(
     private studentsService: StudentsService,
     private globalVariable: GlobalVariable,
-    private teacherService: TeacherService
+    private teacherService: TeacherService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.user = user;
+        this.userUid = user.uid;
         console.log('user', user);
       }
     });
@@ -57,10 +60,17 @@ export class SettingsComponent implements OnInit {
         .subscribe(
           (students: StudentsList[]) => {
             students.every((element) => {
-              if (element.email === this.inputEmail) {
-                this.studentData = element;
-                this.correctEmail = true;
-                return false;
+              if (element.uid === this.userUid) {
+                if (element.email !== this.inputEmail) {
+                  this.toastr.error(
+                    'Verifique os dados e tente novamente!',
+                    'Email ou senha estão incorretos!'
+                  );
+                } else {
+                  this.studentData = element;
+                  this.correctEmail = true;
+                  return false;
+                }
               }
               return true;
             });
@@ -80,10 +90,17 @@ export class SettingsComponent implements OnInit {
         .subscribe(
           (teachers: TeachersList[]) => {
             teachers.every((element) => {
-              if (element.email === this.inputEmail) {
-                this.teacherData = element;
-                this.correctEmail = true;
-                return false;
+              if (element.uid === this.userUid) {
+                if (element.email !== this.inputEmail) {
+                  this.toastr.error(
+                    'Verifique os dados e tente novamente!',
+                    'Email ou senha estão incorretos!'
+                  );
+                } else {
+                  this.teacherData = element;
+                  this.correctEmail = true;
+                  return false;
+                }
               }
               return true;
             });
@@ -125,17 +142,28 @@ export class SettingsComponent implements OnInit {
                 this.inputPassword = '';
                 this.inputNewEmail = '';
                 this.inputNewPassword = '';
+                this.correctEmail = false;
+                this.toastr.success(
+                  'Operação concluída!',
+                  'Email alterado com sucesso!'
+                );
               })
             )
             .subscribe(
               () => {},
-              (error) => {
-                console.log('error', error);
+              () => {
+                this.toastr.error(
+                  'Tivemos um problema!',
+                  'Por favor, tente novamente mais tarde!'
+                );
               }
             );
         },
-        (error) => {
-          console.log('error', error);
+        () => {
+          this.toastr.error(
+            'Tivemos um problema!',
+            'Por favor, tente realizar a operação novamente!'
+          );
         }
       );
     } else {
@@ -164,17 +192,28 @@ export class SettingsComponent implements OnInit {
                 this.inputPassword = '';
                 this.inputNewEmail = '';
                 this.inputNewPassword = '';
+                this.correctEmail = false;
+                this.toastr.success(
+                  'Operação concluída!',
+                  'Email alterado com sucesso!'
+                );
               })
             )
             .subscribe(
               () => {},
-              (error) => {
-                console.log('error', error);
+              () => {
+                this.toastr.error(
+                  'Tivemos um problema!',
+                  'Por favor, tente novamente mais tarde!'
+                );
               }
             );
         },
-        (error) => {
-          console.log('error', error);
+        () => {
+          this.toastr.error(
+            'Tivemos um problema!',
+            'Por favor, tente realizar a operação novamente!'
+          );
         }
       );
     }
@@ -188,9 +227,22 @@ export class SettingsComponent implements OnInit {
     this.user.reauthenticateWithCredential(cred).then(() => {});
 
     this.user.updatePassword(this.inputNewPassword).then(
-      () => {},
-      (error) => {
-        console.log('error', error);
+      () => {
+        this.inputEmail = '';
+        this.inputPassword = '';
+        this.inputNewEmail = '';
+        this.inputNewPassword = '';
+        this.correctEmail = false;
+        this.toastr.success(
+          'Operação concluída!',
+          'Senha alterada com sucesso!'
+        );
+      },
+      () => {
+        this.toastr.error(
+          'Tivemos um problema!',
+          'Por favor, tente realizar a operação novamente!'
+        );
       }
     );
   }

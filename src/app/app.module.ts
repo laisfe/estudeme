@@ -22,7 +22,8 @@ import { environment } from '../environments/environment';
 import { TestComponent } from './pages/test/test.component';
 import { ngxLoadingAnimationTypes, NgxLoadingModule } from 'ngx-loading';
 import { NewActivityComponent } from './pages/new-activity/new-activity.component';
-
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,10 +50,12 @@ import { NewActivityComponent } from './pages/new-activity/new-activity.componen
     ReactiveFormsModule,
     NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.circle,
-        backdropBackgroundColour: 'rgba(0,0,0,0.1)',
-        primaryColour: '#32cc3f', 
-        secondaryColour: '#5de26866', 
+      backdropBackgroundColour: 'rgba(0,0,0,0.1)',
+      primaryColour: '#32cc3f',
+      secondaryColour: '#5de26866',
     }),
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(),
   ],
   exports: [AngularFirestoreModule],
   providers: [GlobalVariable, Document],
