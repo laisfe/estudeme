@@ -1,10 +1,86 @@
+<app-sidebar [route]="'/settings'"></app-sidebar>
+
 <div class="main-content">
   <div class="row">
     <div class="col-md-12">
       <app-header [title]="'Configurações'"></app-header>
       <div class="container">
-
+        <div class="scroll">
+          <section class="data-change">
+            <p class="data-change__data-subtitle">E-mail atual</p>
+            <input
+              [(ngModel)]="inputEmail"
+              class="data-change__input-value"
+              type="text"
+              min="1"
+              step="any"
+              placeholder="E-mail"
+              required
+            />
+            <p class="data-change__data-subtitle">Senha atual</p>
+            <input
+              [(ngModel)]="inputPassword"
+              class="data-change__input-value"
+              type="password"
+              min="1"
+              step="any"
+              placeholder="Senha"
+              required
+            />
+            <button
+              class="data-change__button btn btn-primary"
+              type="submit"
+              (click)="verifyEmail()"
+            >
+              Solicitar verificação
+            </button>
+          </section>
+          <section class="data-change">
+            <p class="data-change__data">Alterar e-mail cadastrado</p>
+            <p class="data-change__data-subtitle">Novo e-mail</p>
+            <input
+              [(ngModel)]="inputNewEmail"
+              class="data-change__input-value"
+              type="text"
+              min="1"
+              step="any"
+              placeholder="E-mail"
+              required
+            />
+            <button
+              class="data-change__button btn btn-primary"
+              type="submit"
+              (click)="changeEmail()"
+              [disabled]="!correctEmail"
+            >
+              Solicitar alteração
+            </button>
+          </section>
+          <section class="data-change">
+            <p class="data-change__data">Alterar senha cadastrada</p>
+            <p class="data-change__data-subtitle">Nova senha</p>
+            <input
+              [(ngModel)]="inputNewPassword"
+              class="data-change__input-value"
+              type="password"
+              min="1"
+              step="any"
+              placeholder="Senha"
+              required
+            />
+            <button
+              class="data-change__button btn btn-primary"
+              type="submit"
+              (click)="changePassword()"
+              [disabled]="!correctEmail"
+            >
+              Solicitar alteração
+            </button>
+          </section>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<ngx-loading [show]="loading"></ngx-loading>

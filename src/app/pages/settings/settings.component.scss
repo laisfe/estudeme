@@ -1,1 +1,51 @@
 @import "../../shared/scss/main-content.scss";
+
+.scroll {
+  height: 477px;
+  overflow-y: auto;
+}
+
+.data-change {
+  padding-bottom: 40px;
+
+  &__data {
+    font-weight: bold;
+    font-size: 20px;
+    padding-bottom: 20px;
+    font-family: "Ubuntu", sans-serif;
+    color: $gray-texts;
+    padding-right: 10px;
+  }
+
+  &__data-subtitle {
+    font-weight: bold;
+    font-size: 13px;
+    padding-bottom: 10px;
+    font-family: "Ubuntu", sans-serif;
+    color: $gray-texts;
+    padding-right: 10px;
+  }
+
+  &__input-value {
+    border: 1px solid #d7d7d7;
+    border-radius: 5px;
+    margin-bottom: 16px;
+  }
+
+  &__button,
+  &__button:disabled:hover {
+    width: 164px;
+    background-color: #ffffff;
+    color: $green-estudeme;
+    font-weight: bold;
+    border: 3px solid $green-estudeme;
+    border-radius: 10px;
+    padding: 2px;
+    display: block;
+  }
+
+  &__button:hover {
+    background-color: $green-estudeme;
+    color: #ffffff;
+  }
+}

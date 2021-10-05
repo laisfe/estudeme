@@ -13,4 +13,11 @@ export class TeacherService {
   getTeachersList(): Observable<TeachersList[]> {
     return this.http.get<TeachersList[]>(`${environment.SERVER_URL}/professor`);
   }
+
+  putTeacher(data: TeachersList, id: number): Observable<TeachersList> {
+    return this.http.put<TeachersList>(
+      `${environment.SERVER_URL}/professor/${id}`,
+      data
+    );
+  }
 }

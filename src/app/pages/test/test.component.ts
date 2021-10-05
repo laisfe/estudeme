@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { finalize } from 'rxjs/operators';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import { AnswersList, Avaliation } from './models/answers';
@@ -62,7 +61,6 @@ export class TestComponent implements OnInit {
           if (element.uid === this.uid) {
             this.didInitialTest = element.fezProvaInicial;
             this.idStudent = element.idAluno;
-            console.log('this.idStudent primeiro if', this.idStudent);
             return false;
           }
           return true;

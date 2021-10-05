@@ -6,8 +6,7 @@ import { TeachersList } from 'src/app/shared/models/teachers';
 import { StudentsService } from 'src/app/shared/services/students.service';
 import { TeacherService } from 'src/app/shared/services/teacher.service';
 import { NewActivityService } from './new-activity.service';
-import { of } from 'rxjs';
-import { catchError, finalize } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
