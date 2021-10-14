@@ -1,1 +1,24 @@
-<p>login works!</p>
+<div class="row content">
+  <div class="col-md-6">
+    <section class="centralize-content">
+      <img class="logo-login" src="../../../assets/img/LogoMakr-2tFfwC.png" alt="Logo Estudeme" />
+      <!-- <form action=""> -->
+      <div class="login form-group">
+        <input class="login__input-label form-control" type="email" placeholder="E-mail" [(ngModel)]="email" required />
+        <input class="login__input-label form-control" type="password" placeholder="Senha" [(ngModel)]="password"
+          required />
+        <button class="login__login-button btn btn-primary" type="submit" (click)="signIn()">
+          Login
+        </button>
+        <button class="login__login-button btn btn-primary" type="submit" (click)="goToSignUpPage()">
+          Cadastrar-se
+        </button>
+      </div>
+      <!-- </form> -->
+    </section>
+  </div>
+
+  <div class="col-md-6">
+    <app-side-image></app-side-image>
+  </div>
+</div>

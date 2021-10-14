@@ -1,0 +1,120 @@
+@import "../../shared/scss/main-content.scss";
+
+.student-docs {
+  &__head {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+
+    &__image {
+      width: 74px;
+    }
+
+    &__name {
+      font-weight: bold;
+      margin-left: 10px;
+      font-size: 19px;
+      color: $gray-texts;
+    }
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+
+    &__main-title {
+      font-weight: bold;
+      font-size: 30px;
+    }
+
+    &__name {
+      display: flex;
+      align-items: center;
+
+      &__class {
+        font-weight: bold;
+        font-size: 20px;
+        margin-right: 10px;
+        border: none;
+      }
+
+      &__class:focus-visible {
+        outline: none;
+      }
+
+      & label {
+        width: 13px;
+        height: 50px;
+        border: red 1px solid;
+        border-radius: 3px;
+        background-color: red;
+      }
+    }
+  }
+
+  &__docs-button {
+    margin-bottom: 25px;
+
+    & .custom-file {
+      margin-bottom: 15px;
+    }
+
+    & .custom-file-label {
+      border: 1px solid #e0e0e0;
+      padding: 6px;
+    }
+
+    & .custom-file-label::after {
+      content: "Procurar";
+    }
+
+    & button {
+      margin-right: 15px;
+      background-color: #ffffff;
+      color: $green-estudeme;
+      font-weight: bold;
+      border: 3px solid $green-estudeme;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    & button:hover {
+      background-color: $green-estudeme;
+      color: #ffffff;
+    }
+
+    & button:disabled {
+      margin-right: 15px;
+      background-color: #fbfbfb;
+      color: #84ff8e;
+      font-weight: bold;
+      border: 3px solid #84ff8e;
+      border-radius: 5px;
+      cursor: auto;
+    }
+  }
+
+  &__scroll-table {
+    height: 185px;
+    overflow-y: auto;
+
+    &__row {
+      border-bottom: 1px solid $gray-texts;
+
+      &__image {
+        width: 40px;
+        cursor: pointer;
+      }
+
+      & td {
+        padding: 23px;
+      }
+    }
+
+    &__row:last-child {
+      border: none;
+    }
+  }
+}

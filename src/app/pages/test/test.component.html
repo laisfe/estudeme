@@ -1,0 +1,72 @@
+<app-sidebar [route]="'/test'"></app-sidebar>
+
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <app-header [title]="'Prova'"></app-header>
+      <div class="container">
+        <div *ngIf="!loading" class="test">
+          <p *ngIf="questionsList.length === 0" class="test__main-message">
+            No momento não há nenhuma prova disponível para você.
+          </p>
+          <p *ngIf="questionsList.length !== 0" class="test__main-message">
+            Responda as questões abaixo para podermos analisar suas possíveis
+            dificuldades
+          </p>
+          <section>
+            <form
+              *ngFor="
+                let questions of questionsList;
+                let first = first;
+                let i = index
+              "
+              class="test__questions"
+              [ngClass]="{ 'first-child': first }"
+            >
+              <div *ngIf="nextQuestion === i">
+                <p class="test__question-title">
+                  {{ i + 1 }} ) {{ questions.enunciado }}
+                </p>
+                <div
+                  class="form-check"
+                  *ngFor="let alternativas of questions.alternativas | keyvalue"
+                >
+                  <input
+                    #questao
+                    type="radio"
+                    id="questions.idQuestao"
+                    name="provinha"
+                    value="alternativas.value"
+                    (change)="onItemChange(alternativas, questions)"
+                  />
+                  <label class="form-check-label ml-1">
+                    {{ alternativas.value }}
+                  </label>
+                </div>
+                <button
+                  class="test__send-button btn btn-primary"
+                  type="submit"
+                  (click)="
+                    verifyAnswer(questions.idQuestao, questions.respostaCorreta)
+                  "
+                >
+                  Responder questão
+                </button>
+              </div>
+            </form>
+            <button
+              *ngIf="questionsList.length !== 0"
+              class="test__send-button btn btn-primary"
+              type="submit"
+              (click)="sendAnswer()"
+            >
+              Enviar respostas
+            </button>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ngx-loading [show]="loading"></ngx-loading>

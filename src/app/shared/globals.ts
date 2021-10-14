@@ -1,0 +1,8 @@
+import { Injectable } from "@angular/core";
+
+@Injectable()
+export class GlobalVariable {
+  public studentNameGlobal: string = '';
+  public personType: string = '';
+  public hideSidebar: boolean = false;
+}

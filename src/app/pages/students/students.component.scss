@@ -1,0 +1,37 @@
+@import "../../shared/scss/main-content.scss";
+@import "../../shared/scss/variables.scss";
+
+.scroll-table {
+  height: 427px;
+  overflow-y: auto;
+}
+
+.students {
+  &__profile-image {
+    width: 76px;
+  }
+
+  & a:hover {
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  &__profile-name {
+    vertical-align: middle;
+    font-weight: bold;
+    color: $gray-texts;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+  }
+
+  &__profile-row {
+    border-bottom: 1px solid $gray-texts;
+    display: flex;
+    padding: 28px 0;
+  }
+
+  & .last-child {
+    border-bottom: none;
+  }
+}

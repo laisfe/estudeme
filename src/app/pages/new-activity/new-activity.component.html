@@ -1,0 +1,86 @@
+<app-sidebar [route]="'/documents'"></app-sidebar>
+
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <app-header [title]="'Nova atividade'"></app-header>
+      <div class="container">
+        <div *ngIf="!loading" class="activity">
+          <span class="activity__subtitle"
+            >Selecione as questões que você deseja estarem presentes na prova:</span
+          >
+          <div
+            class="form-check activity__questions-blocks"
+            *ngFor="let questions of questionsList"
+          >
+            <input
+              type="checkbox"
+              id="flexCheckDefault"
+              (change)="checkCheckBoxvalue(questions)"
+            />
+            <section class="activity__blocks">
+              <label class="form-check-label" for="flexCheckDefault">
+                <span class="activity__bold-font">Enunciado:</span>
+                {{ questions.enunciado }}
+              </label>
+              <label class="form-check-label">
+                <span class="activity__bold-font">Alternativas:</span>
+              </label>
+              <ul>
+                <li>
+                  <span class="activity__bold-font">A:</span>
+                  {{ questions.alternativas.A }}
+                </li>
+                <li>
+                  <span class="activity__bold-font">B:</span>
+                  {{ questions.alternativas.B }}
+                </li>
+                <li>
+                  <span class="activity__bold-font">C:</span>
+                  {{ questions.alternativas.C }}
+                </li>
+                <li>
+                  <span class="activity__bold-font">D:</span>
+                  {{ questions.alternativas.D }}
+                </li>
+                <li>
+                  <span class="activity__bold-font">E:</span>
+                  {{ questions.alternativas.E }}
+                </li>
+              </ul>
+              <label class="form-check-label">
+                <span class="activity__bold-font">Resposta correta:</span>
+                {{ questions.respostaCorreta }}
+              </label>
+            </section>
+          </div>
+          <span class="activity__subtitle"
+            >Selecione os alunos que irão realizar esta prova:</span
+          >
+          <div *ngFor="let students of studentsList">
+            <input
+              type="checkbox"
+              id="flexCheckDefault"
+              (change)="checkCheckBoxStudentsValue(students)"
+            />
+            <section class="activity__blocks">
+              <label class="form-check-label" for="flexCheckDefault">
+                <span class="activity__bold-font">Nome:</span>
+                {{ students.nome }}
+              </label>
+              <label class="form-check-label" for="flexCheckDefault">
+                <span class="activity__bold-font">Ano:</span>
+                {{ students.ano }}
+              </label>
+            </section>
+          </div>
+          <button class="activity__send-button" (click)="sendQuestions()">
+            Enviar questões
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ngx-loading [show]="loading"></ngx-loading>

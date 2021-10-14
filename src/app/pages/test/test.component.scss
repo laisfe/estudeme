@@ -1,0 +1,48 @@
+@import "../../shared/scss/main-content.scss";
+
+.test {
+  height: calc(100% - 35px);
+  overflow-y: auto;
+
+  &__main-message {
+    color: $gray-texts;
+    font-weight: bold;
+    font-size: 16px;
+    padding-bottom: 15px;
+  }
+
+  & .first-child {
+    padding-top: unset;
+  }
+
+  &__questions {
+    padding-top: 20px;
+  }
+
+  &__question-title {
+    padding-bottom: 15px;
+  }
+
+  &__send-button {
+    width: 177px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    color: $green-estudeme;
+    font-weight: bold;
+    border: 3px solid $green-estudeme;
+    border-radius: 10px;
+  }
+
+  &__send-button:hover {
+    background-color: $green-estudeme;
+    color: #ffffff;
+  }
+
+  &__send-button:active {
+    color: $green-estudeme !important;
+    background-color: #fff !important;
+    border-color: $green-estudeme !important;
+  }
+}

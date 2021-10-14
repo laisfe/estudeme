@@ -1,0 +1,50 @@
+@import "../../shared/scss/main-content.scss";
+
+.activity {
+  height: 427px;
+  overflow-y: auto;
+
+  & label {
+    display: block;
+  }
+
+  &__questions-blocks {
+    margin-bottom: 20px;
+  }
+
+  &__blocks {
+    margin-left: 30px;
+    margin-top: -25px;
+  }
+
+  &__bold-font {
+    font-weight: bold;
+  }
+
+  &__subtitle {
+    color: #797b79;
+    font-weight: bold;
+    font-size: 16px;
+    display: block;
+    margin-bottom: 15px;
+  }
+
+  &__send-button {
+    width: 260px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 25px;
+    background-color: #ffffff;
+    color: $green-estudeme;
+    font-weight: bold;
+    border: 3px solid $green-estudeme;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+
+  &__send-button:hover {
+    background-color: $green-estudeme;
+    color: #ffffff;
+    cursor: pointer;
+  }
+}

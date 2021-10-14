@@ -1,0 +1,63 @@
+@import "../../shared/scss/reset.scss";
+@import "../../shared/scss/variables.scss";
+
+.content {
+  height: 100%;
+
+  .centralize-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .signup-content {
+    padding: 15px 0;
+    height: 100%;
+  }
+
+  .form-side {
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  .logo-login {
+    width: 100px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+    display: flex;
+  }
+
+  .login {
+    margin: 0 auto;
+    width: 280px;
+    max-width: 375px;
+    min-width: 260px;
+
+    &__input-label {
+      display: flex;
+      margin: 25px 0;
+    }
+
+    &__radio-button {
+      margin-bottom: 25px;
+    }
+
+    &__login-button {
+      width: 260px;
+      display: block;
+      margin: 0 auto;
+      margin-bottom: 25px;
+      background-color: #ffffff;
+      color: $green-estudeme;
+      font-weight: bold;
+      border: 3px solid $green-estudeme;
+      border-radius: 10px;
+    }
+
+    &__login-button:hover {
+      background-color: $green-estudeme;
+      color: #ffffff;
+    }
+  }
+}
