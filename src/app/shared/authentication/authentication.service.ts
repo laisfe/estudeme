@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import {
@@ -10,6 +9,7 @@ import {
 } from '../models/registration';
 import { SignupService } from 'src/app/shared/services/signup.service';
 import { GlobalVariable } from '../globals';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +22,8 @@ export class AuthenticationService {
     private angularFireAuth: AngularFireAuth,
     private router: Router,
     private signupService: SignupService,
-    public globalVariable: GlobalVariable
+    public globalVariable: GlobalVariable,
+    private toastr: ToastrService
   ) {}
 
   /* Sign up */
@@ -111,6 +112,10 @@ export class AuthenticationService {
       })
       .catch((err) => {
         console.log('Something is wrong:', err.message);
+        this.toastr.error(
+          'E-mail ou senha estão incorretos',
+          'Dados inválidos'
+        );
       });
   }
 

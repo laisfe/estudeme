@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/shared/authentication/authentication.service';
 import { Observable } from 'rxjs';
 import firebase from 'firebase/app';
