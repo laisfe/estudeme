@@ -20,6 +20,12 @@
             reports.data | date: "dd/MM/yyyy"
           }}</label>
         </section>
+        <p
+          class="reports__no-reports"
+          *ngIf="avaliationsList.length === 0 && !loading"
+        >
+          No momento não há nenhum relatório disponível para você.
+        </p>
       </div>
     </div>
   </div>
