@@ -37,7 +37,10 @@ export class ReportComponent implements OnInit {
         })
       )
       .subscribe((avaliations: Avaliation[]) => {
-        avaliations.every((element) => {
+        console.log('this.uid', this.uid);
+        avaliations.forEach((element) => {
+          console.log('element', element);
+          console.log('element', element);
           if (element.uid === this.uid) {
             this.avaliationsList.push({
               idAvaliacao: element.idAvaliacao,
