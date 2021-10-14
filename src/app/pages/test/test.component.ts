@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import { AnswersList, Avaliation } from './models/answers';
+import { AnswersList, Avaliation } from '../../shared/models/answers';
 import { AlternativesList, Test } from '../../shared/models/questions';
 import { TestService } from './test.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
@@ -185,6 +185,7 @@ export class TestComponent implements OnInit {
           idTurma: studentData.idTurma,
           idDisciplina: 0,
           idProfessor: 0,
+          uid: studentData.uid,
         };
 
         this.testService.postTest(dataAvaliation).subscribe(

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Test } from '../../shared/models/questions';
-import { Avaliation } from './models/answers';
+import { Avaliation } from '../../shared/models/answers';
 
 @Injectable({
   providedIn: 'root',

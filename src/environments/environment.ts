@@ -10,4 +10,5 @@ export const environment = {
     messagingSenderId: '813310012092',
   },
   BASE_URL: '/api',
+  REPORTS: 'https://storageestudeme.blob.core.windows.net/avaliacoes'
 };

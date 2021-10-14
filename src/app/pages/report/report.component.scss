@@ -1,1 +1,30 @@
 @import "../../shared/scss/main-content.scss";
+
+.reports {
+  border: 2px solid $gray-texts;
+  border-radius: 13px;
+  width: 160px;
+  height: 135px;
+  display: inline-block;
+  margin-right: 20px;
+  cursor: pointer;
+
+  &__images {
+    width: 55px;
+    display: block;
+    margin: 0 auto;
+    padding-top: 20px;
+    cursor: pointer;
+  }
+
+  &__labels {
+    display: block;
+    overflow-wrap: break-word;
+    padding: 20px;
+    font-size: 13px;
+    color: #32cc3f;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+  }
+}

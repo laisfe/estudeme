@@ -15,7 +15,6 @@ import { GlobalVariable } from '../globals';
   providedIn: 'root',
 })
 export class AuthenticationService {
-  public userData: Observable<firebase.User>;
   public studentRegistration: StudentRegistration;
   public teacherRegistration: TeacherRegistration;
 
@@ -24,9 +23,7 @@ export class AuthenticationService {
     private router: Router,
     private signupService: SignupService,
     public globalVariable: GlobalVariable
-  ) {
-    this.userData = angularFireAuth.authState;
-  }
+  ) {}
 
   /* Sign up */
   SignUp(

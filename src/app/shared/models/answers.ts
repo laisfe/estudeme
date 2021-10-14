@@ -15,4 +15,5 @@ export interface Avaliation {
   idTurma: number;
   idDisciplina?: number;
   idProfessor?: number;
+  uid: string;
 }
