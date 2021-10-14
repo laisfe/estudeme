@@ -51,6 +51,7 @@
   </section>
 
   <section
+    *ngIf="globalVariable?.personType === 'aluno'"
     class="sidebar-content__section-division"
     [ngClass]="{ reports: routeReturn() === '/reports' }"
   >
