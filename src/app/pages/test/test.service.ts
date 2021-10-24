@@ -25,4 +25,8 @@ export class TestService {
       data
     );
   }
+
+  getReports() {
+    return this.http.get(`${environment.REPORTS_URL}`);
+  }
 }

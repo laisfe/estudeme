@@ -6,6 +6,8 @@ import { AlternativesList, Test } from '../../shared/models/questions';
 import { TestService } from './test.service';
 import { StudentsService } from 'src/app/shared/services/students.service';
 import { StudentsList } from 'src/app/shared/models/students-types';
+import { ToastrService } from 'ngx-toastr';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-test',
@@ -31,7 +33,8 @@ export class TestComponent implements OnInit {
 
   constructor(
     private testService: TestService,
-    private studentsService: StudentsService
+    private studentsService: StudentsService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -188,12 +191,28 @@ export class TestComponent implements OnInit {
           uid: studentData.uid,
         };
 
-        this.testService.postTest(dataAvaliation).subscribe(
-          () => {},
-          (error) => {
-            console.log('error', error);
-          }
-        );
+        this.testService
+          .postTest(dataAvaliation)
+          .pipe(
+            finalize(() => {
+              this.toastr.success(
+                'A prova foi enviada com sucesso!',
+                'Dados salvos!'
+              );
+              this.testService.getReports().subscribe(
+                () => {},
+                (error) => {
+                  console.log('error', error);
+                }
+              );
+            })
+          )
+          .subscribe(
+            () => {},
+            (error) => {
+              console.log('error', error);
+            }
+          );
 
         if (!this.didInitialTest) {
           const dataStudents: StudentsList = {

@@ -1,6 +1,7 @@
 export const environment = {
   production: false,
   SERVER_URL: 'https://estudeme.azurewebsites.net',
+  REPORTS_URL: 'https://fuzzy-estudeme.herokuapp.com/',
   firebase: {
     apiKey: 'AIzaSyA-yQPerwxy6lIDwLD4b-cTJWie2-LMYRM',
     authDomain: 'estudeme-63a8c.firebaseapp.com',
