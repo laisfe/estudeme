@@ -30,6 +30,7 @@ export class TestComponent implements OnInit {
   didInitialTest: boolean;
   uid: string;
   idStudent: number;
+  startTest: boolean = false;
 
   constructor(
     private testService: TestService,
@@ -38,14 +39,17 @@ export class TestComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loading = true;
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.uid = user.uid;
-        this.getQuestionsList();
       }
     });
     this.nextQuestion = 0;
+  }
+
+  beginTest(): void {
+    this.startTest = true;
+    this.getQuestionsList();
   }
 
   startTimer(): void {

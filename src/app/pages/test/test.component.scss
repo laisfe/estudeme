@@ -1,7 +1,7 @@
 @import "../../shared/scss/main-content.scss";
 
 .test {
-  height: calc(100% - 35px);
+  height: 100%;
   overflow-y: auto;
 
   &__main-message {
@@ -33,6 +33,16 @@
     font-weight: bold;
     border: 3px solid $green-estudeme;
     border-radius: 10px;
+  }
+  
+  &__center {
+    width: 300px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
   }
 
   &__send-button:hover {
