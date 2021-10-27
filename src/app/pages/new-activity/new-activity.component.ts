@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { QuestionsList, Test } from 'src/app/shared/models/questions';
 import { StudentsList } from 'src/app/shared/models/students-types';
 import { TeachersList } from 'src/app/shared/models/teachers';
@@ -9,6 +8,7 @@ import { NewActivityService } from './new-activity.service';
 import { finalize } from 'rxjs/operators';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-new-activity',
@@ -16,6 +16,7 @@ import 'firebase/auth';
   styleUrls: ['./new-activity.component.scss'],
 })
 export class NewActivityComponent implements OnInit {
+  @ViewChildren("checkboxes") checkboxes: QueryList<ElementRef>;
   loading: boolean = false;
   public data = {};
   public formDataList = [];
@@ -24,12 +25,13 @@ export class NewActivityComponent implements OnInit {
   savedStudentsList: { idAluno: number; idTurma: number }[] = [];
   studentsList: StudentsList[] = [];
   uidUser: string;
+  check: boolean = false;
 
   constructor(
     public newActivityService: NewActivityService,
     public teacherService: TeacherService,
-    private angularFireAuth: AngularFireAuth,
-    private studentsService: StudentsService
+    private studentsService: StudentsService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -162,7 +164,13 @@ export class NewActivityComponent implements OnInit {
               idTurma: element.idTurma,
             };
             this.newActivityService.postTest(dataTest).subscribe(
-              () => {},
+              () => {
+                this.toastr.success(
+                  'Nova atividade criada com sucesso!',
+                  'Dados salvos!'
+                );
+                this.uncheck();
+              },
               (error) => {
                 console.log('error', error);
               }
@@ -184,5 +192,11 @@ export class NewActivityComponent implements OnInit {
           console.log('error', error);
         }
       );
+  }
+
+  uncheck(): void {
+    this.checkboxes.forEach((element) => {
+      element.nativeElement.checked = false;
+    });
   }
 }
