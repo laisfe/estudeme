@@ -39,7 +39,6 @@ export class DocumentsComponent implements OnInit {
       }
     });
     this.globalVariable.personType;
-    this.globalVariable.studentNameGlobal;
     this.globalVariable.studentIdGlobal;
     this.returnFiles();
     this.searchStudent();
