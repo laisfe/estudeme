@@ -1,0 +1,34 @@
+<app-sidebar [route]="'/reports'"></app-sidebar>
+
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <app-header [title]="'Relatórios'"></app-header>
+      <div class="container">
+        <a></a>
+        <section
+          class="reports"
+          *ngFor="let reports of avaliationsList"
+          (click)="openReport(reports.idAvaliacao)"
+        >
+          <img
+            class="reports__images"
+            src="../../../assets/svg/file-pdf.svg"
+            alt="Ícone PDF"
+          />
+          <label class="reports__labels">{{
+            reports.data | date: "dd/MM/yyyy"
+          }}</label>
+        </section>
+        <p
+          class="reports__no-reports"
+          *ngIf="avaliationsList.length === 0 && !loading"
+        >
+          No momento não há nenhum relatório disponível para você.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ngx-loading [show]="loading"></ngx-loading>

@@ -7,6 +7,8 @@ import { StudentsService } from 'src/app/shared/services/students.service';
 import { environment } from 'src/environments/environment';
 import { DocumentsService } from './documents.service';
 import { Documents } from './models/documents';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 @Component({
   selector: 'app-documents',
@@ -19,17 +21,26 @@ export class DocumentsComponent implements OnInit {
   studentsList: StudentsList[] = [];
   studentName: string;
   loading: boolean = false;
+  uid: string;
+  idStudent: number;
 
   constructor(
     private service: DocumentsService,
     private studentsService: StudentsService,
     private angularFireAuth: AngularFireAuth,
     public globalVariable: GlobalVariable,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.uid = user.uid;
+      }
+    });
     this.globalVariable.personType;
+    this.globalVariable.studentNameGlobal;
+    this.globalVariable.studentIdGlobal;
     this.returnFiles();
     this.searchStudent();
   }
@@ -103,5 +114,10 @@ export class DocumentsComponent implements OnInit {
 
   createActivity(): void {
     this.router.navigate(['/newActivity']);
+  }
+
+  reports(): void {
+    this.loading = true;
+    this.router.navigate([`/reports/${this.globalVariable.studentIdGlobal}`]);
   }
 }

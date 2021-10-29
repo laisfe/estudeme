@@ -11,7 +11,7 @@
               <div *ngFor="let students of studentsList; let last = last">
                 <a
                   [routerLink]="'/documents'"
-                  (click)="passStudentName(students.nome)"
+                  (click)="passStudentName(students)"
                 >
                   <tr
                     class="students__profile-row"

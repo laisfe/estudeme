@@ -13,7 +13,7 @@
               alt="Imagem alunos"
             />
             <h4 class="student-docs__head__name">
-              {{ studentName }}
+              {{ globalVariable?.studentNameGlobal }}
             </h4>
           </section>
 
@@ -43,6 +43,9 @@
             </button>
             <button *ngIf="globalVariable?.personType === 'professor'" (click)="createActivity()">
               Criar atividade
+            </button>
+            <button *ngIf="globalVariable?.personType === 'professor'" (click)="reports()">
+              Relatórios
             </button>
           </section>
           <div class="student-docs__scroll-table">

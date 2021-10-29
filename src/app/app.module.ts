@@ -24,6 +24,7 @@ import { ngxLoadingAnimationTypes, NgxLoadingModule } from 'ngx-loading';
 import { NewActivityComponent } from './pages/new-activity/new-activity.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReportIdComponent } from './pages/report-id/report-id.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +39,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderComponent,
     TestComponent,
     NewActivityComponent,
+    ReportIdComponent,
   ],
   imports: [
     BrowserModule,

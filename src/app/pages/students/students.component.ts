@@ -22,8 +22,9 @@ export class StudentsComponent implements OnInit {
     this.getStudentsList();
   }
 
-  passStudentName(studentName: string): void {
-    this.globalVariable.studentNameGlobal = studentName;
+  passStudentName(student: StudentsList): void {
+    this.globalVariable.studentNameGlobal = student.nome;
+    this.globalVariable.studentIdGlobal = student.idAluno;
   }
 
   getStudentsList(): void {
